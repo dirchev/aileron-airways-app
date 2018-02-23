@@ -16,7 +16,11 @@ class TimelinePage extends Component {
 
     return {
       actionsLeft: [backButton],
-      actionsRight: [<EventSearchInput />, <EditTimelineButton />, <CreateEventButton />]
+      actionsRight: [
+        <EventSearchInput key="event-search" />,
+        <EditTimelineButton key="edit-timeline" />,
+        <CreateEventButton key="create-event"/>
+      ]
     }
   }
 

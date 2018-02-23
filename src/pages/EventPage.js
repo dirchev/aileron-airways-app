@@ -13,7 +13,9 @@ class EventPage extends Component {
 
     return {
       actionsLeft: [backButton],
-      actionsRight: [<EditEventButton />],
+      actionsRight: [
+        <EditEventButton key="edit-event"/>
+      ],
     }
   }
 

@@ -6,7 +6,10 @@ import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
 class HomePage extends Component {
   getNavigationItems () {
     return {
-      actionsRight: [<TimelineSearchInput />, <TimelineCreateButton />]
+      actionsRight: [
+        <TimelineSearchInput key="timeline-search" />,
+        <TimelineCreateButton key="timeline-create"/>
+      ]
     }
   }
 

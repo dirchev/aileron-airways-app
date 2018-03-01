@@ -4,7 +4,7 @@ import TimelinesList from '../components/TimelinesList'
 import TimelineSearchInput from '../components/nav-items/TimelineSearchInput'
 import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
 
-import timelineActions from '../actions/timeline'
+import timelineActions from '../action-creators/timeline'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -13,7 +13,7 @@ class HomePage extends Component {
     var result = _.chain(this.props.timelines).values()
     if (this.props.timelinesFilter) {
       result = result.filter((timeline) => {
-        return timeline.Title.toLowerCase().indexOf(this.props.timelinesFilter) !== -1
+        return timeline.Title.toLowerCase().indexOf(this.props.timelinesFilter.toLowerCase()) !== -1
       })
     }
 
@@ -65,8 +65,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = {
-  fetchAll: timelineActions.fetchAll
+const mapDispatchToProps = function (dispatch) {
+  return {
+    fetchAll: () => {
+      dispatch(timelineActions.fetchAll())
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

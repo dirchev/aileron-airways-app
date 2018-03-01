@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import timelineActions from '../../actions/timeline'
+import uiActions from '../../action-creators/ui'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -35,8 +35,12 @@ class TimelineSearchInput extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  setTimelinesFilter: timelineActions.setTimelinesFilter
+const mapDispatchToProps = function (dispatch) {
+  return {
+    setTimelinesFilter: (filter) => {
+      dispatch(uiActions.setTimelinesFilter(filter))
+    }
+  }
 }
 
 export default connect(null, mapDispatchToProps)(TimelineSearchInput)

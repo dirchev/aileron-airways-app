@@ -10,7 +10,7 @@ export default {
 
     return function (dispatch) {
       dispatch({
-        type: actions.timeline.START_CREATE_TIMELINE, 
+        type: actions.timeline.START_CREATE_TIMELINE,
         data: {Id: assignedId, ...timelineData}
       })
 
@@ -19,13 +19,13 @@ export default {
           return response
         })
         .then((response) => {dispatch({
-          type: actions.timeline.SUCCESS_CREATE_TIMELINE, 
+          type: actions.timeline.SUCCESS_CREATE_TIMELINE,
           data: response})
         })
         .catch((error) => {
           dispatch({
-            type: actions.timeline.ERROR_CREATE_TIMELINE, 
-            data: timelineData, 
+            type: actions.timeline.ERROR_CREATE_TIMELINE,
+            data: {Id: assignedId, ...timelineData},
             error: error
           })
         })

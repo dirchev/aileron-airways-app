@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import uiActions from '../../action-creators/ui'
+import uiActions from '../action-creators/ui'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -15,21 +15,19 @@ class TimelineSearchInput extends Component {
 
   render() {
     return (
-      <div className="navbar-item" key="search-input">
-        <div className="field">
-          <p className="control has-icons-right">
-            <input
-              className="input"
-              name="search"
-              placeholder="Search timeline..."
-              type="text"
-              onKeyUp={({target}) => _.debounce(this.onFilterChange, 300)(target.value)}
-            />
-            <span className="icon is-small is-right">
-              <i className="fa fa-search"></i>
-            </span>
-          </p>
-        </div>
+      <div className="field">
+        <p className="control has-icons-right">
+          <input
+            className="input"
+            name="search"
+            placeholder="Search timeline..."
+            type="text"
+            onKeyUp={({target}) => _.debounce(this.onFilterChange, 300)(target.value)}
+          />
+          <span className="icon is-small is-right">
+            <i className="fa fa-search"></i>
+          </span>
+        </p>
       </div>
     )
   }

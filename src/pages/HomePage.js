@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Navigation from '../components/Navigation'
 import TimelinesList from '../components/TimelinesList'
-import TimelineSearchInput from '../components/nav-items/TimelineSearchInput'
 import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
+import TimelineSearch from '../components/TimelineSearch'
 
 import timelineActions from '../action-creators/timeline'
 import { connect } from 'react-redux'
@@ -25,7 +25,6 @@ class HomePage extends Component {
   getNavigationItems () {
     return {
       actionsRight: [
-        <TimelineSearchInput key="timeline-search" />,
         <TimelineCreateButton key="timeline-create"/>
       ]
     }
@@ -39,7 +38,7 @@ class HomePage extends Component {
     return (
       <div>
         <Navigation {...this.getNavigationItems()}/>
-        <div className="container is-fluid">
+        <div className="container">
           <div className="hero">
             <div className="hero-body">
               <div className="title">
@@ -49,6 +48,9 @@ class HomePage extends Component {
                 <p>{this.getTimelinesArray().length} timelines available</p>
               </div>
             </div>
+          </div>
+          <div className="mb-lg">
+            <TimelineSearch />
           </div>
           <TimelinesList timelines={this.getTimelinesArray()}/>
         </div>

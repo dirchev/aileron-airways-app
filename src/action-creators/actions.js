@@ -8,6 +8,7 @@ const actionsList = {
    */
   ui: {
     SET_TIMELINES_FILTER: 'SET_TIMELINES_FILTER',
+    OPEN_MODAL: 'OPEN_MODAL',
   },
   /**
    * Object of all ui related actions, such as search terms and others

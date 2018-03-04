@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
+import timelineActions from '../../action-creators/timeline'
+import { connect } from 'react-redux'
+
+let count = 1
 
 class CreateTimelineButton extends Component {
+  constructor () {
+    super()
+    this.showEditTimelineModal = this.showEditTimelineModal.bind(this)
+  }
+
   showEditTimelineModal () {
-    alert('not implemented')
+    this.props.createTimeline({
+      Title: 'New Timeline ' + count++
+    })
   }
 
   render() {
@@ -15,4 +26,12 @@ class CreateTimelineButton extends Component {
   }
 }
 
-export default CreateTimelineButton
+const mapDispatchToProps = function (dispatch) {
+  return {
+    createTimeline: (timelineData) => {
+      dispatch(timelineActions.create(timelineData))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreateTimelineButton)

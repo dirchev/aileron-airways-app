@@ -18,7 +18,7 @@ class Navigation extends Component {
 
   render () {
     return (
-      <div className="navbar">
+      <div className="navbar is-primary">
         <div className="navbar-brand">
           <div
             className={'navbar-burger' + (this.state.opened ? ' is-active' : '')}

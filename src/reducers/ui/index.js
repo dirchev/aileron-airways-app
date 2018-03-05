@@ -1,5 +1,6 @@
 const defaultState = {
-  timelinesFilter: null
+  timelinesFilter: null,
+  modal: null
 }
 
 export default function uiReducer (state = defaultState, action) {
@@ -8,6 +9,11 @@ export default function uiReducer (state = defaultState, action) {
       return {
         ...state,
         timelinesFilter: action.data
+      }
+    case 'OPEN_MODAL':
+      return {
+        ...state,
+        modal: action.data
       }
     default:
       return state

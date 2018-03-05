@@ -1,4 +1,5 @@
 import actions from './actions.js'
+
 /**
  * Emits an action to change the timelines filter term
  * @param {string} filterTerm to be set
@@ -11,6 +12,19 @@ const setTimelinesFilter = function (filterTerm) {
   }
 }
 
+/**
+ * Emits an action to open a modal
+ * @param {string} modalName to be opened
+ * @returns {object} action
+ */
+const openModal = function (modalName) {
+  return {
+    type: actions.ui.OPEN_MODAL,
+    data: modalName
+  }
+}
+
 export default {
-  setTimelinesFilter: setTimelinesFilter
+  setTimelinesFilter: setTimelinesFilter,
+  openModal: openModal
 }

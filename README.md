@@ -53,3 +53,39 @@ npm run test
 ```bash
 npm run coverage
 ```
+
+## Deploying
+
+### Install heroku
+
+1. Install `heroku-cli` to your computer. More info on that [here](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+
+2. Log in to your heroku account [more info here](https://devcenter.heroku.com/articles/heroku-cli#getting-started)
+
+   ```
+   heroku login
+   ```
+
+3. Set heroku as git remote in your project
+
+   ```
+   # in the application root folder
+   heroku git:remote -a aileron-airways-app
+   ```
+
+### Deploy master to heroku
+
+1. Go to master branch and pull
+
+```
+git checkout master
+git pull origin master
+```
+
+2. Sync master with heroku remote
+
+```
+git push heroku master
+```
+
+3. Done!

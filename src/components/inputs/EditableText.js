@@ -38,7 +38,7 @@ class EditableText extends Component {
       return (
         <form onSubmit={this.handleSubmit}>
           <div className="field is-grouped is-grouped-multiline">
-            <Input doNotSetField={true} value={this.state.value} onChange={this.handleChange} />
+            <Input doNotSetField={true} value={this.state.value} onChange={this.handleChange} autoFocus/>
             <div className="control">
               <button type="submit" className="button is-link mr-sm"><i className="fa fa-send"></i></button>
               <button type="button" onClick={this.resetField} className="button is-link is-danger"><i className="fa fa-times"></i></button>

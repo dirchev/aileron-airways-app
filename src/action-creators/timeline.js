@@ -33,6 +33,34 @@ export default {
   },
 
   // Get all available timelines from server
+  edit: function (timelineData) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.timeline.START_EDIT_TIMELINE,
+        data: timelineData
+      })
+
+      SDK.Timelines.editTitle(timelineData.Id, timelineData.Title)
+        .then((response) => {
+          return response
+        })
+        .then((response) => {
+          dispatch({
+            type: actions.timeline.SUCCESS_EDIT_TIMELINE,
+            data: timelineData
+          })
+        })
+        .catch((error) => {
+          dispatch({
+            type: actions.timeline.ERROR_EDIT_TIMELINE,
+            data: timelineData,
+            error: error
+          })
+        })
+    }
+  },
+
+  // Get all available timelines from server
   fetchAll: function () {
     return function (dispatch) {
       dispatch({type: actions.timelines.START_FETCH_TIMELINES})

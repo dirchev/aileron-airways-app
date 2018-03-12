@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import CreateTimelineModal from './CreateTimelineModal'
+import CreateEventModal from './CreateEventModal'
 import uiActions from '../../action-creators/ui'
 
 const modalsMap = {
-  'createTimeline': CreateTimelineModal
+  'createTimeline': CreateTimelineModal,
+  'createEvent': CreateEventModal
 }
 
 class ModalsParent extends Component {
@@ -13,7 +15,7 @@ class ModalsParent extends Component {
     if (!this.props.modalOpened) return null
     var Component = modalsMap[this.props.modalOpened]
     if (!Component) return null
-    return <Component onClose={this.props.onModalClose} />
+    return <Component onClose={this.props.onModalClose} {...this.props.modalProps} />
   }
 
   render () {
@@ -28,7 +30,8 @@ class ModalsParent extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
-    modalOpened: state.ui.modal
+    modalOpened: state.ui.modal,
+    modalProps: state.ui.modalProps || {}
   }
 }
 

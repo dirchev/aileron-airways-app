@@ -31,7 +31,14 @@ class Input extends Component {
           : null
         }
         <div className={controlClassNames}>
-          <input className="input" type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} {...this.getEventHandlers()}/>
+          <input
+            className="input"
+            type={this.props.type}
+            placeholder={this.props.placeholder}
+            value={this.props.value}
+            {...this.getEventHandlers()}
+            autoFocus={this.props.autoFocus}
+          />
           {
             this.props.iconLeft
             ? (

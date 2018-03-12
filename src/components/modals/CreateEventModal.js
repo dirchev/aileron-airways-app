@@ -12,7 +12,7 @@ class CreateEventModal extends Component {
     this.state = {
       title: '',
       description: '',
-      eventDateTime: null,
+      eventDateTime: '',
     }
 
     this.onChange = this.onChange.bind(this)

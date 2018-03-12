@@ -1,18 +1,22 @@
 import React, { Component } from 'react'
-
 import _ from 'lodash'
-import { connect } from 'react-redux'
 import moment from 'moment'
-import { Link, Redirect } from 'react-router-dom'
-import eventActions from '../action-creators/event'
+import { connect } from 'react-redux'
+import timelineActions from '../../action-creators/timeline'
+import eventActions from '../../action-creators/event'
 
-import Navigation from '../components/Navigation'
-import EventSearchInput from '../components/nav-items/EventSearchInput'
-import EditTimelineButton from '../components/nav-items/EditTimelineButton'
-import CreateEventButton from '../components/nav-items/CreateEventButton'
-import EventsList from '../components/EventsList'
+import { Link, Redirect } from 'react-router-dom'
+import Navigation from '../../components/Navigation'
+import CreateEventButton from '../../components/nav-items/CreateEventButton'
+import TimelineHeading from './TimelineHeading'
+import EventsList from '../../components/EventsList'
 
 class TimelinePage extends Component {
+  constructor () {
+    super()
+    this.handleTitleChange = this.handleTitleChange.bind(this)
+  }
+
   getNavigationItems () {
     var backButton = (
       <Link to='/' className="navbar-item" href="" key="back-button">
@@ -24,9 +28,7 @@ class TimelinePage extends Component {
     return {
       actionsLeft: [backButton],
       actionsRight: [
-        <EventSearchInput key="event-search" />,
-        <EditTimelineButton key="edit-timeline" />,
-        <CreateEventButton key="create-event" timeline={this.props.timeline}/>
+        <CreateEventButton timeline={this.props.timeline} key="create-event"/>
       ]
     }
   }
@@ -35,24 +37,24 @@ class TimelinePage extends Component {
     this.props.fetchEvents()
   }
 
+  handleTitleChange (newTitle) {
+    this.props.changeTimelineTitle({
+      ...this.props.timeline,
+      Title: newTitle
+    })
+  }
+
   render() {
     if (!this.props.timeline) {
       return (<Redirect to="/"/>)
     }
     return (
-      <div className="mb-lg">
+      <div>
         <Navigation {...this.getNavigationItems()}/>
         <div className="container">
-          <div className="hero">
-            <div className="hero-body">
-              <div className="title">
-                <h1>{this.props.timeline.Title}</h1>
-              </div>
-              <div className="subtitle">
-                <p>{moment(this.props.timeline.CreationTimeStamp).fromNow()}</p>
-              </div>
-            </div>
-          </div>
+          <TimelineHeading
+            onTitleChange={this.handleTitleChange}
+            timeline={this.props.timeline}/>
           <EventsList events={this.props.timeline.events} />
         </div>
       </div>
@@ -65,8 +67,9 @@ const mapStateToProps = (state, ownProps) => {
   if (!timeline) return {timeline}
   timeline = {
     ...timeline,
-    events: _.chain(timeline.events)
-             .map((eventId) => state.events[eventId])
+    events: _.chain(state.events)
+             .values()
+             .filter((event) => event.TimelineId === ownProps.match.params.Id)
              .sortBy(
                (e) => e.EventDateTime
                 ? moment(e.EventDateTime).toISOString()
@@ -82,10 +85,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    changeTimelineTitle: function (timelineData) {
+      dispatch(timelineActions.edit(timelineData))
+    },
     fetchEvents: () => {
       dispatch(eventActions.fetchForTimeline(ownProps.match.params.Id))
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelinePage)

@@ -38,6 +38,7 @@ class CreateTimelineModal extends Component {
             <div className="card-content">
               <form onSubmit={this.onSubmit}>
                 <Input
+                  autoFocus
                   onChange={this.onChange}
                   value={this.state.title}
                   label="Title"

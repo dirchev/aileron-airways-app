@@ -17,10 +17,11 @@ const setTimelinesFilter = function (filterTerm) {
  * @param {string} modalName to be opened
  * @returns {object} action
  */
-const openModal = function (modalName) {
+const openModal = function (modalName, modalProps) {
   return {
     type: actions.ui.OPEN_MODAL,
-    data: modalName
+    data: modalName,
+    props: modalProps
   }
 }
 

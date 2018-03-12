@@ -1,31 +1,27 @@
-/**
- * @fileOverview This file lists all of the available action types
- * @name actions.js
- */
 const actionsList = {
-  /**
-   * Object of all ui related actions, such as search terms and others
-   */
   ui: {
     SET_TIMELINES_FILTER: 'SET_TIMELINES_FILTER',
     OPEN_MODAL: 'OPEN_MODAL',
   },
-  /**
-   * Object of all ui related actions, such as search terms and others
-   */
   timeline: {
     START_CREATE_TIMELINE: 'START_CREATE_TIMELINE',
     SUCCESS_CREATE_TIMELINE: 'SUCCESS_CREATE_TIMELINE',
     ERROR_CREATE_TIMELINE: 'ERROR_CREATE_TIMELINE',
+
+    START_FETCH_EVENTS: 'START_FETCH_EVENTS',
+    SUCCESS_FETCH_EVENTS: 'SUCCESS_FETCH_EVENTS',
+    ERROR_FETCH_EVENTS: 'ERROR_FETCH_EVENTS',
   },
-  /**
-   * Object of all timelines related actions, such as fetch
-   */
   timelines: {
     START_FETCH_TIMELINES: 'START_FETCH_TIMELINES',
     SUCCESS_FETCH_TIMELINES: 'SUCCESS_FETCH_TIMELINES',
     ERROR_FETCH_TIMELINES: 'ERROR_FETCH_TIMELINES',
-  }
+  },
+  event: {
+    START_CREATE_EVENT: 'START_CREATE_EVENT',
+    SUCCESS_CREATE_EVENT: 'SUCCESS_CREATE_EVENT',
+    ERROR_CREATE_EVENT: 'ERROR_CREATE_EVENT',
+  },
 }
 
 export default actionsList

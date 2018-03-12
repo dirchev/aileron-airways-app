@@ -1,9 +1,8 @@
 const defaultState = {}
 
-export default function timelinesReducer (state = defaultState, action) {
+export default function eventsReducer (state = defaultState, action) {
   switch(action.type) {
-    case 'START_CREATE_TIMELINE':
-    case 'START_EDIT_TIMELINE':
+    case 'START_CREATE_EVENT':
       return {
         ...state,
         [action.data.Id]: {
@@ -12,8 +11,7 @@ export default function timelinesReducer (state = defaultState, action) {
           synced: false
         }
       }
-    case 'SUCCESS_CREATE_TIMELINE':
-    case 'SUCCESS_EDIT_TIMELINE':
+    case 'SUCCESS_CREATE_EVENT':
       return {
         ...state,
         [action.data.Id]: {
@@ -22,8 +20,7 @@ export default function timelinesReducer (state = defaultState, action) {
           synced: true
         }
       }
-    case 'ERROR_EDIT_TIMELINE':
-    case 'ERROR_CREATE_TIMELINE':
+    case 'ERROR_CREATE_EVENT':
       return {
         ...state,
         [action.data.Id]: {
@@ -33,15 +30,14 @@ export default function timelinesReducer (state = defaultState, action) {
           error: action.error
         }
       }
-
-    case 'SUCCESS_FETCH_TIMELINES':
-      var newState = {}
-      action.data.forEach(function (timeline) {
-        newState[timeline.Id] = {loading: false, synced: true, ...timeline}
+    case 'SUCCESS_FETCH_EVENTS':
+      var newEvents = {}
+      action.data.events.forEach(function (event) {
+        newEvents[event.Id] = {loading: false, synced: false, ...event}
       })
       return {
         ...state,
-        ...newState,
+        ...newEvents
       }
     default:
       return state

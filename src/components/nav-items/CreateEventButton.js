@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import uiActions from '../../action-creators/ui'
 
 class CreateEventButton extends Component {
-  showEditEventModal () {
-    alert('not implemented')
-  }
-
   render() {
     return (
-      <a className="navbar-item" onClick={this.showEditEventModal} key="create-event-button">
+      <a className="navbar-item" onClick={this.props.openModal} key="create-event-button">
         <i className="fa fa-plus mr-sm"></i>
         Create Event
       </a>
@@ -15,4 +14,12 @@ class CreateEventButton extends Component {
   }
 }
 
-export default CreateEventButton
+const mapDispatchToProps = function (dispatch, ownProps) {
+  return {
+    openModal: () => {
+      dispatch(uiActions.openModal('createEvent', {timelineId: ownProps.timeline.Id}))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreateEventButton)

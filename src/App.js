@@ -17,7 +17,7 @@ class App extends Component {
             <div>
               <Route exact path="/" component={HomePage}></Route>
               <Route exact path="/timeline/:Id" component={TimelinePage}></Route>
-              <Route exact path="/event" component={EventPage}></Route>
+              <Route exact path="/event/:Id" component={EventPage}></Route>
             </div>
           </BrowserRouter>
           <ModalsParent />

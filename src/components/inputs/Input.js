@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 
 class Input extends Component {
-  constructor () {
-    super()
-  }
-
   getEventHandlers () {
     var wrap = function (handler) {
       return (event) => {

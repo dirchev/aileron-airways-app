@@ -9,19 +9,6 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 class HomePage extends Component {
-  getTimelinesArray () {
-    var result = _.chain(this.props.timelines).values()
-    if (this.props.timelinesFilter) {
-      result = result.filter((timeline) => {
-        return timeline.Title.toLowerCase().indexOf(this.props.timelinesFilter.toLowerCase()) !== -1
-      })
-    }
-
-    result = result.sortBy('CreatedTimeStamp').reverse()
-
-    return result.value()
-  }
-
   getNavigationItems () {
     return {
       actionsRight: [
@@ -45,14 +32,14 @@ class HomePage extends Component {
                 <h1>Timelines</h1>
               </div>
               <div className="subtitle">
-                <p>{this.getTimelinesArray().length} timelines available</p>
+                <p>{this.props.timelines.length} timelines available</p>
               </div>
             </div>
           </div>
           <div className="mb-lg">
             <TimelineSearch />
           </div>
-          <TimelinesList timelines={this.getTimelinesArray()}/>
+          <TimelinesList timelines={this.props.timelines}/>
         </div>
       </div>
     )
@@ -60,10 +47,16 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    var timelines = _.chain(state.timelines).values()
+    if (state.ui.timelinesFilter) {
+      timelines = timelines.filter((timeline) => {
+        return timeline.Title.toLowerCase().indexOf(state.ui.timelinesFilter.toLowerCase()) !== -1
+      })
+    }
+
+    timelines = timelines.sortBy('CreatedTimeStamp').reverse().value()
   return {
-    ...ownProps,
-    timelines: state.timelines,
-    timelinesFilter: state.ui.timelinesFilter,
+    timelines: timelines
   }
 }
 

@@ -26,7 +26,11 @@ class TimelineOptionsButton extends Component {
       <div className="page-options">
         {this.state.opened ? this.renderItems() : null}
         <button className="button is-medium is-danger is-circle" onClick={this.toggleOpened}>
-          <i className="fa fa-bars"></i>
+          {
+            this.state.opened
+            ? (<i className="fa fa-times"></i>)
+            : (<i className="fa fa-bars"></i>)
+          }
         </button>
       </div>
     )

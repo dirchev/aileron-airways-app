@@ -1,0 +1,23 @@
+.page-options {
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  .items {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    display: block;
+    overflow: hidden;
+
+    .button {
+      float: right;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.button.is-circle {
+  border-radius: 50%;
+}

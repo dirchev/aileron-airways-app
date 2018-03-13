@@ -1,3 +1,4 @@
+import _ from 'lodash'
 const defaultState = {}
 
 export default function timelinesReducer (state = defaultState, action) {
@@ -33,6 +34,26 @@ export default function timelinesReducer (state = defaultState, action) {
           error: action.error
         }
       }
+
+    case 'START_DELETE_TIMELINE':
+      return {
+        [action.data.Id]: {
+          loading: true,
+          synced: false
+        }
+      }
+
+    case 'ERROR_DELETE_TIMELINE':
+      return {
+        [action.data.Id]: {
+          loading: false,
+          synced: true,
+          error: action.error
+        }
+      }
+
+    case 'SUCCESS_DELETE_TIMELINE':
+      return _.omit(state, action.data.Id)
 
     case 'SUCCESS_FETCH_TIMELINES':
       var newState = {}

@@ -10,6 +10,7 @@ import Navigation from '../../components/Navigation'
 import CreateEventButton from '../../components/nav-items/CreateEventButton'
 import TimelineHeading from './TimelineHeading'
 import EventsList from '../../components/EventsList'
+import TimelineOptionsButton from '../../components/option-buttons/TimelineOptionsButton'
 
 class TimelinePage extends Component {
   constructor () {
@@ -57,6 +58,7 @@ class TimelinePage extends Component {
             timeline={this.props.timeline}/>
           <EventsList events={this.props.timeline.events} />
         </div>
+        <TimelineOptionsButton deleteTimeline={this.props.deleteTimeline}/>
       </div>
     )
   }
@@ -88,9 +90,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     changeTimelineTitle: function (timelineData) {
       dispatch(timelineActions.edit(timelineData))
     },
+    deleteTimeline: () => {
+      dispatch(timelineActions.delete(ownProps.match.params.Id))
+    },
     fetchEvents: () => {
       dispatch(eventActions.fetchForTimeline(ownProps.match.params.Id))
-    }
+    },
   }
 }
 

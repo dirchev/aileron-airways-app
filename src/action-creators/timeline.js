@@ -60,6 +60,31 @@ export default {
     }
   },
 
+  delete: function (timelineId) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.timeline.START_DELETE_TIMELINE,
+        data: {Id: timelineId},
+      })
+
+      SDK.Timelines.delete(timelineId)
+        .then((response) => {return response})
+        .then((response) => {
+          dispatch({
+            type: actions.timeline.SUCCESS_DELETE_TIMELINE,
+            data: {Id: timelineId},
+          })
+        })
+        .catch((error) => {
+          dispatch({
+            type: actions.timeline.ERROR_DELETE_TIMELINE,
+            data: {Id: timelineId},
+            error: error
+          })
+        })
+    }
+  },
+
   // Get all available timelines from server
   fetchAll: function () {
     return function (dispatch) {

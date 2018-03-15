@@ -6,6 +6,9 @@ export default {
   // Create timeline and sync it to server
   create: function (eventData) {
     var assignedId = uuid.v4()
+    eventData = {...eventData}
+
+    console.log(eventData);
 
     return function (dispatch) {
       dispatch({
@@ -30,6 +33,58 @@ export default {
             error: error
           })
         })
+    }
+  },
+  editTitle:function(eventData){
+    return function(dispatch){
+      dispatch({
+        type: actions.event.START_EDIT_EVENT_TITLE,
+        data: eventData
+      })
+
+      SDK.TimelineEvents.editTitle(eventData.Id,eventData.Title)
+      .then((response) => {
+        return response
+      })
+      .then((response) => {
+        dispatch({
+          type: actions.event.SUCCESS_EDIT_EVENT_TITLE,
+          data: eventData
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: actions.timeline.ERROR_EDIT_EVENT_TITLE,
+          data: eventData,
+          error: error
+        })
+      })
+    }
+  },
+  editDescription:function(eventData){
+    return function(dispatch){
+      dispatch({
+        type: actions.event.START_EDIT_EVENT_DESCRIPTION,
+        data: eventData
+      })
+
+      SDK.TimelineEvents.editDescription(eventData.Id,eventData.Description)
+      .then((response) => {
+        return response
+      })
+      .then((response) => {
+        dispatch({
+          type: actions.event.SUCCESS_EDIT_EVENT_DESCRIPTION,
+          data: eventData
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: actions.timeline.ERROR_EDIT_EVENT_DESCRIPTION,
+          data: eventData,
+          error: error
+        })
+      })
     }
   },
   fetchForTimeline: function (timelineId) {

@@ -2,10 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link, Redirect } from 'react-router-dom'
+import eventActions from '../action-creators/event'
 
 import Navigation from '../components/Navigation'
 
+import EditableText from '../components/inputs/EditableText'
+
+
 class EventPage extends Component {
+  constructor () {
+    super()
+    this.handleTitleChange = this.handleTitleChange.bind(this)
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
+  }
+
   getNavigationItems () {
     var backButton = (
       <Link to={`/timeline/${this.props.event.TimelineId}`}
@@ -20,6 +30,20 @@ class EventPage extends Component {
     return {
       actionsLeft: [backButton],
     }
+  }
+
+  handleTitleChange (newTitle) {
+    this.props.changeEventTitle({
+      ...this.props.event,
+      Title: newTitle
+    })
+  }
+
+  handleDescriptionChange (newDescription) {
+    this.props.changeEventDescription({
+      ...this.props.event,
+      Description: newDescription
+    })
   }
 
   render() {
@@ -38,7 +62,9 @@ class EventPage extends Component {
               <div className="card">
                 <div className="card-content">
                   <div className="title">
-                    <h1>{this.props.event.Title}</h1>
+                    <EditableText defaultValue={this.props.event.Title} onChange={this.handleTitleChange}>
+                      {this.props.event.Title}
+                    </EditableText>
                   </div>
                   {
                     this.props.event.EventDateTime
@@ -49,7 +75,11 @@ class EventPage extends Component {
                     )
                     : null
                   }
-                  <p>{this.props.event.Description}</p>
+                  <span>
+                    <EditableText defaultValue={this.props.event.Description} onChange={this.handleDescriptionChange}>
+                      {this.props.event.Description}
+                    </EditableText>
+                  </span>
                 </div>
               </div>
             </div>
@@ -66,4 +96,15 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(EventPage)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    changeEventTitle: function (eventData) {
+      dispatch(eventActions.editTitle(eventData))
+    },
+    changeEventDescription: function (eventData) {
+      dispatch(eventActions.editDescription(eventData))
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(EventPage)

@@ -3,7 +3,6 @@ import SDK from '../timeline-sdk'
 import actions from './actions.js'
 
 export default {
-  // Create timeline and sync it to server
   create: function (eventData) {
     var assignedId = uuid.v4()
 
@@ -32,6 +31,7 @@ export default {
         })
     }
   },
+
   fetchForTimeline: function (timelineId) {
     return function (dispatch) {
       dispatch({
@@ -70,6 +70,33 @@ export default {
           dispatch({
             type: actions.timeline.ERROR_FETCH_EVENTS,
             data: {Id: timelineId},
+            error: error
+          })
+        })
+    }
+  },
+
+  delete: function (eventId, timelineId) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.event.START_DELETE_EVENT,
+        data: {Id: eventId, TimelineId: timelineId}
+      })
+
+      SDK.Timelines.unlinkEvent(timelineId, eventId)
+        .then(() => {
+          SDK.TimelineEvents.delete(eventId)
+        })
+        .then(() => {
+          dispatch({
+            type: actions.event.SUCCESS_DELETE_EVENT,
+            data: {Id: eventId, TimelineId: timelineId}
+          })
+        })
+        .catch((error) => {
+          dispatch({
+            type: actions.event.ERROR_CREATE_EVENT,
+            data: {Id: eventId, TimelineId: timelineId},
             error: error
           })
         })

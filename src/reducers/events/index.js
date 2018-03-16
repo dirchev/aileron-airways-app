@@ -1,3 +1,4 @@
+import _ from 'lodash'
 const defaultState = {}
 
 export default function eventsReducer (state = defaultState, action) {
@@ -39,6 +40,29 @@ export default function eventsReducer (state = defaultState, action) {
         ...state,
         ...newEvents
       }
+
+    case 'START_DELETE_EVENT':
+      return {
+        [action.data.Id]: {
+          ...state[action.data.Id],
+          loading: true,
+          synced: false
+        }
+      }
+
+    case 'ERROR_DELETE_EVENT':
+      return {
+        [action.data.Id]: {
+          ...state[action.data.Id],
+          loading: false,
+          synced: true,
+          error: action.error
+        }
+      }
+
+    case 'SUCCESS_DELETE_EVENT':
+      return _.omit(state, action.data.Id)
+
     default:
       return state
   }

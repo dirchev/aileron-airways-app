@@ -3,12 +3,23 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link, Redirect } from 'react-router-dom'
 
+import eventActions from '../action-creators/event'
+import EventOptionsButton from '../components/option-buttons/EventOptionsButton'
 import Navigation from '../components/Navigation'
 
 class EventPage extends Component {
+  constructor (props) {
+    super(props)
+    if (props.event) {
+      // record the timeline id
+      // we will use it when the event is deleted
+      this.timelineId = props.event.TimelineId
+    }
+  }
+
   getNavigationItems () {
     var backButton = (
-      <Link to={`/timeline/${this.props.event.TimelineId}`}
+      <Link to={this.timelineId ? `/timeline/${this.timelineId}` : '/'}
         className="navbar-item"
         href=""
         key="back-button">
@@ -24,11 +35,12 @@ class EventPage extends Component {
 
   render() {
     if (!this.props.event) {
-      return (<Redirect to="/"/>)
+      return (<Redirect to={this.timelineId ? `/timeline/${this.timelineId}` : '/'}/>)
     }
     return (
       <div className="mb-lg">
         <Navigation {...this.getNavigationItems()}/>
+        <EventOptionsButton event={this.props.event} deleteEvent={this.props.deleteEvent}/>
         <div className="container is-fluid">
           <div className="columns mt-lg">
             <div className="column is-one-quarter">
@@ -66,4 +78,13 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(EventPage)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    deleteEvent: (eventId, timelineId) => {
+      dispatch(eventActions.delete(eventId, timelineId))
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventPage)

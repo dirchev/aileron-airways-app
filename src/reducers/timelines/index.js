@@ -38,6 +38,7 @@ export default function timelinesReducer (state = defaultState, action) {
     case 'START_DELETE_TIMELINE':
       return {
         [action.data.Id]: {
+          ...state[action.data.Id],
           loading: true,
           synced: false
         }
@@ -46,6 +47,7 @@ export default function timelinesReducer (state = defaultState, action) {
     case 'ERROR_DELETE_TIMELINE':
       return {
         [action.data.Id]: {
+          ...state[action.data.Id],
           loading: false,
           synced: true,
           error: action.error

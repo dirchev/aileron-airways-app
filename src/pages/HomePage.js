@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navigation from '../components/Navigation'
 import TimelinesList from '../components/TimelinesList'
+import TimelinesSearchList from '../components/TimelinesSearchList'
 import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
 import TimelineSearch from '../components/TimelineSearch'
 
@@ -32,14 +33,22 @@ class HomePage extends Component {
                 <h1>Timelines</h1>
               </div>
               <div className="subtitle">
-                <p>{this.props.timelines.length} timelines available</p>
+                <p>{this.props.timelines.length} total timelines</p>
               </div>
             </div>
           </div>
           <div className="mb-lg">
             <TimelineSearch />
           </div>
-          <TimelinesList timelines={this.props.timelines}/>
+          {
+            this.props.hasFiltersApplied
+            ? (
+              <TimelinesSearchList />
+            )
+            : (
+              <TimelinesList />
+            )
+          }
         </div>
       </div>
     )
@@ -47,16 +56,9 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    var timelines = _.chain(state.timelines).values()
-    if (state.ui.timelinesFilter) {
-      timelines = timelines.filter((timeline) => {
-        return timeline.Title.toLowerCase().indexOf(state.ui.timelinesFilter.toLowerCase()) !== -1
-      })
-    }
-
-    timelines = timelines.sortBy('CreatedTimeStamp').reverse().value()
   return {
-    timelines: timelines
+    timelines: _.chain(state.timelines).values().value(), // get array of timelines
+    hasFiltersApplied: !!state.ui.timelinesFilter // indicate if there is a filter
   }
 }
 

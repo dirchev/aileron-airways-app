@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import moment from 'moment'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Fuse from 'fuse.js'
+
+import TimelineItem from './TimelineItem'
 
 const FUSE_OPTIONS = {
   keys: [
@@ -45,30 +45,13 @@ class TimelinesSearchList extends Component {
         <div className="notification">
           Showing results for "{this.props.timelinesFilter}"
         </div>
-        {this.renderTimelines()}
+        {
+          this.state.timelines.map(function (timeline) {
+            return <TimelineItem key={timeline.Id} timeline={timeline}/>
+          })
+        }
       </div>
     )
-  }
-
-  renderTimelines () {
-    return this.state.timelines.map(function (timeline) {
-      return (
-        <Link key={timeline.Id} to={`/timeline/${timeline.Id}`} className="box mb-sm">
-          <div className="media">
-            <div className="media-content">
-              <div className="content">
-                <div className="title">
-                  {timeline.Title}
-                </div>
-                <div className="subtitle">
-                  {moment(timeline.CreatedTimeStamp).format("MMMM Do YYYY")}
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      )
-    })
   }
 }
 

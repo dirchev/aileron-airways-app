@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import Fuse from 'fuse.js'
 
+import Pagination from '../Pagination'
 import TimelineItem from './TimelineItem'
 
 const FUSE_OPTIONS = {
@@ -19,9 +20,15 @@ class TimelinesSearchList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      timelines: props.timelines
+      timelines: props.timelines,
+      page: 1
     }
+    this.handlePageChange = this.handlePageChange.bind(this)
     this.fuseSearch = new Fuse(this.state.timelines, FUSE_OPTIONS)
+  }
+
+  handlePageChange (page) {
+    this.setState({page})
   }
 
   // every time there are new props - we need to re-calculate the search results
@@ -40,16 +47,21 @@ class TimelinesSearchList extends Component {
   }
 
   render() {
+    var skip = this.state.page * 10 - 10
     return (
       <div>
         <div className="notification">
           Showing results for "{this.props.timelinesFilter}"
         </div>
         {
-          this.state.timelines.map(function (timeline) {
+          this.state.timelines.slice(0 + skip, 10 + skip).map(function (timeline) {
             return <TimelineItem key={timeline.Id} timeline={timeline}/>
           })
         }
+        <Pagination
+          page={this.state.page}
+          pages={Math.ceil(this.state.timelines.length / 10)}
+          onPageChange={this.handlePageChange} />
       </div>
     )
   }

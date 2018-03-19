@@ -1,6 +1,6 @@
 // CSS
 import '../node_modules/font-awesome/css/font-awesome.min.css'
-import './styles/index.css'
+import './build-index.css'
 // !CSS
 
 import React from 'react'

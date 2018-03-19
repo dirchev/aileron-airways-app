@@ -5,6 +5,7 @@
   "homepage": "https://aileron-airways-app.herokuapp.com/",
   "dependencies": {
     "bulma": "0.6.2",
+    "bulma-extensions": "1.0.13",
     "classnames": "2.2.5",
     "font-awesome": "4.7.0",
     "fuse.js": "3.2.0",

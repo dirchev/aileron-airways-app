@@ -50,8 +50,8 @@ class Pagination extends Component {
 }
 
 Pagination.propTypes = {
-  page: PropTypes.number,
-  pages: PropTypes.number,
-  onPageChange: PropTypes.func,
+  page: PropTypes.number.isRequired,
+  pages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
 }
 export default Pagination

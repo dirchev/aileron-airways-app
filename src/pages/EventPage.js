@@ -3,22 +3,26 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link, Redirect } from 'react-router-dom'
 import eventActions from '../action-creators/event'
-
+import EventOptionsButton from '../components/option-buttons/EventOptionsButton'
 import Navigation from '../components/Navigation'
-
 import EditableText from '../components/inputs/EditableText'
 
 
 class EventPage extends Component {
-  constructor () {
-    super()
+  constructor(props) {
+    super(props)
+    if (props.event) {
+      // record the timeline id
+      // we will use it when the event is deleted
+      this.timelineId = props.event.TimelineId
+    }
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
   }
 
-  getNavigationItems () {
+  getNavigationItems() {
     var backButton = (
-      <Link to={`/timeline/${this.props.event.TimelineId}`}
+      <Link to={this.timelineId ? `/timeline/${this.timelineId}` : '/'}
         className="navbar-item"
         href=""
         key="back-button">
@@ -32,14 +36,14 @@ class EventPage extends Component {
     }
   }
 
-  handleTitleChange (newTitle) {
+  handleTitleChange(newTitle) {
     this.props.changeEventTitle({
       ...this.props.event,
       Title: newTitle
     })
   }
 
-  handleDescriptionChange (newDescription) {
+  handleDescriptionChange(newDescription) {
     this.props.changeEventDescription({
       ...this.props.event,
       Description: newDescription
@@ -48,11 +52,12 @@ class EventPage extends Component {
 
   render() {
     if (!this.props.event) {
-      return (<Redirect to="/"/>)
+      return (<Redirect to={this.timelineId ? `/timeline/${this.timelineId}` : '/'} />)
     }
     return (
       <div className="mb-lg">
-        <Navigation {...this.getNavigationItems()}/>
+        <Navigation {...this.getNavigationItems()} />
+        <EventOptionsButton event={this.props.event} deleteEvent={this.props.deleteEvent} />
         <div className="container is-fluid">
           <div className="columns mt-lg">
             <div className="column is-one-quarter">
@@ -68,12 +73,12 @@ class EventPage extends Component {
                   </div>
                   {
                     this.props.event.EventDateTime
-                    ? (
-                      <div className="subtitle">
-                        <time className="subtitle">{moment(this.props.event.EventDateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</time>
-                      </div>
-                    )
-                    : null
+                      ? (
+                        <div className="subtitle">
+                          <time className="subtitle">{moment(this.props.event.EventDateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</time>
+                        </div>
+                      )
+                      : null
                   }
                   <span>
                     <EditableText defaultValue={this.props.event.Description} onChange={this.handleDescriptionChange}>
@@ -103,8 +108,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     changeEventDescription: function (eventData) {
       dispatch(eventActions.editDescription(eventData))
+    },
+    deleteEvent: (eventId, timelineId) => {
+      dispatch(eventActions.delete(eventId, timelineId))
     }
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(EventPage)
+export default connect(mapStateToProps, mapDispatchToProps)(EventPage)

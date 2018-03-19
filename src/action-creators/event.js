@@ -5,7 +5,6 @@ import actions from './actions.js'
 export default {
   create: function (eventData) {
     var assignedId = uuid.v4()
-    eventData = { ...eventData }
 
     return function (dispatch) {
       dispatch({
@@ -42,9 +41,6 @@ export default {
 
       SDK.TimelineEvents.editTitle(eventData.Id, eventData.Title)
         .then((response) => {
-          return response
-        })
-        .then((response) => {
           dispatch({
             type: actions.event.SUCCESS_EDIT_EVENT_TITLE,
             data: eventData
@@ -67,9 +63,6 @@ export default {
       })
 
       SDK.TimelineEvents.editDescription(eventData.Id, eventData.Description)
-        .then((response) => {
-          return response
-        })
         .then((response) => {
           dispatch({
             type: actions.event.SUCCESS_EDIT_EVENT_DESCRIPTION,

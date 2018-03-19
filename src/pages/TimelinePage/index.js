@@ -55,7 +55,8 @@ class TimelinePage extends Component {
         <div className="container">
           <TimelineHeading
             onTitleChange={this.handleTitleChange}
-            timeline={this.props.timeline}/>
+            timeline={this.props.timeline}
+           />
           <EventsList events={this.props.timeline.events} />
         </div>
         <TimelineOptionsButton deleteTimeline={this.props.deleteTimeline}/>

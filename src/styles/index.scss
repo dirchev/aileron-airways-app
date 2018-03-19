@@ -1,9 +1,6 @@
-@import './helpers.sass'
-@import './page-options.scss'
+@import './colours.scss';
+@import './helpers.scss';
+@import './page-options.scss';
 
-$primary: #0684c2;
-$success: #10ab96;
-$link: #10ab96;
-$dark: #3a4850;
-
-@import '../../node_modules/bulma/bulma.sass'
+// Bulma
+@import '../../node_modules/bulma/bulma.sass';

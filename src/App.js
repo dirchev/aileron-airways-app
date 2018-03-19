@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
+        <div className="pb-lg">
           <BrowserRouter>
             <div>
               <Route exact path="/" component={HomePage}></Route>

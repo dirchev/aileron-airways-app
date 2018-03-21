@@ -10,7 +10,7 @@
 /build
 
 # build css
-src/styles/index.css
+src/build-index.css
 
 # misc
 src/secrets.js

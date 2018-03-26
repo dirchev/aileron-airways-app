@@ -1,6 +1,7 @@
 export default {
   'timelineSDK': {
-    'TenantId': 'INSERT TENANT ID',
-    'AuthToken': 'INSERT AUTH TOKEN'
+    endpoint: 'https://gcu.ideagen-development.com/',
+    TenantId: 'Team7',
+    AuthToken: 'AUTH_TOKEN'
   }
 }

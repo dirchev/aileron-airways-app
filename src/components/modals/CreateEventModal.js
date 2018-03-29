@@ -80,11 +80,7 @@ class CreateEventModal extends Component {
                     />
                   </div>
                 </div>
-
-
-
                 <div className="field is-grouped">
-
                   <div className="control">
                     <button className="button is-text" type="button" onClick={this.props.onClose}>Cancel</button>
                   </div>

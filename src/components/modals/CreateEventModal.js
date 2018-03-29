@@ -5,9 +5,11 @@ import { connect } from 'react-redux'
 import Input from '../inputs/Input'
 import Textarea from '../inputs/Textarea'
 import eventActions from '../../action-creators/event'
+import Datetime from 'react-datetime'
+
 
 class CreateEventModal extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       title: '',
@@ -19,13 +21,13 @@ class CreateEventModal extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  onChange (field) {
+  onChange(field) {
     return (value) => {
-      this.setState({[field]: value})
+      this.setState({ [field]: value })
     }
   }
 
-  onSubmit (e) {
+  onSubmit(e) {
     e.preventDefault()
     this.props.createEvent({
       TimelineId: this.props.timelineId,
@@ -36,7 +38,7 @@ class CreateEventModal extends Component {
     this.props.onClose()
   }
 
-  render () {
+  render() {
     return (
       <div className="modal is-active">
         <div className="modal-background"></div>
@@ -61,14 +63,28 @@ class CreateEventModal extends Component {
                   label="Description"
                   placeholder="Please enter event description..."
                 />
-                <Input
+                {/* <Input
                   onChange={this.onChange('eventDateTime')}
                   type='datetime-local'
                   value={this.state.eventDateTime}
                   label="Date and Time"
                   placeholder="Please enter when the event happened..."
-                />
+                /> */}
+                <div>
+                  <div class='mb-md'>
+                    <b>Date and Time</b>
+                    <Datetime
+                      onChange={this.onChange('eventDateTime')}
+                      //type='react-datetime' 
+                      value={this.state.eventDateTime}
+                    />
+                  </div>
+                </div>
+
+
+
                 <div className="field is-grouped">
+
                   <div className="control">
                     <button className="button is-text" type="button" onClick={this.props.onClose}>Cancel</button>
                   </div>

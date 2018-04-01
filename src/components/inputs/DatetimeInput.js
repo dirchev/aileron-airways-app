@@ -11,7 +11,6 @@ class DatetimeInput extends Component {
   }
 
   handleOnChange (dateMoment) {
-    console.log(dateMoment.toISOString());
     this.props.onChange(dateMoment.toISOString())
   }
 

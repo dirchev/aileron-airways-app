@@ -47,8 +47,6 @@ export default function eventsReducer(state = defaultState, action) {
         ...state,
         ...newEvents
       }
-      
-     
 
     case 'ERROR_DELETE_EVENT':
       return {

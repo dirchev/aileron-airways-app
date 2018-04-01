@@ -56,15 +56,25 @@ class LinkEventModal extends Component {
         <div className="modal-background"></div>
         <div className="modal-content">
           <div className="box panel">
-            <div className="panel-block">
-              <Input
-                placeholder="Search events..."
-                value={this.state.searchTerm}
-                onChange={this.handleEventSearchChange}
-                iconRight='fa fa-search'
-                autoFocus
-              />
-            </div>
+            {
+              this.state.events.length === 0
+              ? (
+                <div className="panel-block">
+                  Can not find events to link to.
+                </div>
+              )
+              : (
+                <div className="panel-block">
+                  <Input
+                    placeholder="Search events..."
+                    value={this.state.searchTerm}
+                    onChange={this.handleEventSearchChange}
+                    iconRight='fa fa-search'
+                    autoFocus
+                  />
+                </div>
+              )
+            }
             {
               this.state.events.map((event) => {
                 return (
@@ -77,6 +87,9 @@ class LinkEventModal extends Component {
                 )
               })
             }
+            <div className="panel-block">
+              <button className="button is-danger" onClick={this.props.onClose}>Close</button>
+            </div>
           </div>
         </div>
       </div>
@@ -87,13 +100,32 @@ class LinkEventModal extends Component {
 const mapStateToProps = (state, ownProps) => {
   var eventId = ownProps.EventId
   var timelineId = ownProps.TimelineId
+  var linkedEventsIds = state.eventLinks
+    // filter to only links for this event
+    .filter(function (link) {
+      return link.TimelineEventId === eventId
+    })
+    // get event ids
+    .map(function (link) {
+      return link.LinkedToTimelineEventId
+    })
 
   var events = _.chain(Object.keys(state.events))
+    // get all events
     .map(function (eventId) {
       return state.events[eventId]
     })
+    // filter to only events from this timeline
     .filter(function (event) {
       return event.TimelineId === timelineId
+    })
+    // filter out current event
+    .filter(function (event) {
+      return event.Id !== eventId
+    })
+    // filter out already linked events
+    .filter(function (event) {
+      return linkedEventsIds.indexOf(event.Id) === -1
     })
     .sortBy(function (event) {
       return moment(event.EventDateTime).toISOString()

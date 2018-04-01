@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
-
-import Input from '../inputs/Input'
-import Textarea from '../inputs/Textarea'
 import eventActions from '../../action-creators/event'
 
+import Input from '../inputs/Input'
+import DatetimeInput from '../inputs/DatetimeInput'
+import Textarea from '../inputs/Textarea'
+
 class CreateEventModal extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       title: '',
@@ -19,13 +20,13 @@ class CreateEventModal extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  onChange (field) {
+  onChange(field) {
     return (value) => {
-      this.setState({[field]: value})
+      this.setState({ [field]: value })
     }
   }
 
-  onSubmit (e) {
+  onSubmit(e) {
     e.preventDefault()
     this.props.createEvent({
       TimelineId: this.props.timelineId,
@@ -36,7 +37,7 @@ class CreateEventModal extends Component {
     this.props.onClose()
   }
 
-  render () {
+  render() {
     return (
       <div className="modal is-active">
         <div className="modal-background"></div>
@@ -61,12 +62,11 @@ class CreateEventModal extends Component {
                   label="Description"
                   placeholder="Please enter event description..."
                 />
-                <Input
+                <DatetimeInput
                   onChange={this.onChange('eventDateTime')}
-                  type='datetime-local'
                   value={this.state.eventDateTime}
                   label="Date and Time"
-                  placeholder="Please enter when the event happened..."
+                  placeholder="Please enter the date and time of the event..."
                 />
                 <div className="field is-grouped">
                   <div className="control">

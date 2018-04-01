@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import eventActions from '../../action-creators/event'
 
 import Input from '../inputs/Input'
+import DatetimeInput from '../inputs/DatetimeInput'
 import Textarea from '../inputs/Textarea'
-import eventActions from '../../action-creators/event'
-import Datetime from 'react-datetime'
-
 
 class CreateEventModal extends Component {
   constructor() {
@@ -63,23 +62,12 @@ class CreateEventModal extends Component {
                   label="Description"
                   placeholder="Please enter event description..."
                 />
-                {/* <Input
+                <DatetimeInput
                   onChange={this.onChange('eventDateTime')}
-                  type='datetime-local'
                   value={this.state.eventDateTime}
                   label="Date and Time"
-                  placeholder="Please enter when the event happened..."
-                /> */}
-                <div>
-                  <div class='mb-md'>
-                    <b>Date and Time</b>
-                    <Datetime
-                      onChange={this.onChange('eventDateTime')}
-                      //type='react-datetime' 
-                      value={this.state.eventDateTime}
-                    />
-                  </div>
-                </div>
+                  placeholder="Please enter the date and time of the event..."
+                />
                 <div className="field is-grouped">
                   <div className="control">
                     <button className="button is-text" type="button" onClick={this.props.onClose}>Cancel</button>

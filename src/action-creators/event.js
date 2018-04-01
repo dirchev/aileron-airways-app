@@ -149,5 +149,78 @@ export default {
           })
         })
     }
+  },
+
+  getLinkedEvents: function (eventId) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.event.START_GET_LINKED_EVENTS,
+        data: { TimelineEventId: eventId }
+      })
+
+      SDK.TimelineEvents.getLinkedEvents(eventId)
+        .then(function (result) {
+          dispatch({
+            type: actions.event.SUCCESS_GET_LINKED_EVENTS,
+            data: result
+          })
+        })
+        .catch(function (error) {
+          dispatch({
+            type: actions.event.ERROR_GET_LINKED_EVENTS,
+            data: { TimelineEventId: eventId },
+            error: error
+          })
+        })
+    }
+  },
+
+  linkEvent: function (eventId, toLinkEventId) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.event.START_LINK_EVENT,
+        data: { TimelineEventId: eventId, LinkedToTimelineEventId: toLinkEventId }
+      })
+
+      SDK.TimelineEvents.linkEvent(eventId, toLinkEventId)
+        .then(function (result) {
+          dispatch({
+            type: actions.event.SUCCESS_LINK_EVENT,
+            data: result
+          })
+        })
+        .catch(function (error) {
+          dispatch({
+            type: actions.event.ERROR_LINK_EVENT,
+            data: { TimelineEventId: eventId, LinkedToTimelineEventId: toLinkEventId },
+            error: error
+          })
+        })
+    }
+  },
+
+  unlinkEvent: function (eventId, toUnlinkEventId) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.event.START_UNLINK_EVENT,
+        data: { TimelineEventId: eventId, LinkedToTimelineEventId: toUnlinkEventId }
+      })
+
+      SDK.TimelineEvents.unlinkEvent(eventId, toUnlinkEventId)
+        .then(function (result) {
+          dispatch({
+            type: actions.event.SUCCESS_UNLINK_EVENT,
+            data: { TimelineEventId: eventId, LinkedToTimelineEventId: toUnlinkEventId },
+          })
+        })
+        .catch(function (error) {
+          console.log(error);
+          dispatch({
+            type: actions.event.ERROR_UNLINK_EVENT,
+            data: { TimelineEventId: eventId, LinkedToTimelineEventId: toUnlinkEventId },
+            error: error
+          })
+        })
+    }
   }
 }

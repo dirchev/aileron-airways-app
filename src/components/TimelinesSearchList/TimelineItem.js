@@ -15,7 +15,7 @@ class TimelineItem extends Component {
                 {timeline.Title}
               </div>
               <div className="subtitle">
-                {moment(timeline.CreatedTimeStamp).format("MMMM Do YYYY")}
+                {moment(timeline.CreationTimeStamp).format("MMMM Do YYYY")}
               </div>
             </div>
           </div>

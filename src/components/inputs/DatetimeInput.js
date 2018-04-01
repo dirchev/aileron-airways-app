@@ -10,8 +10,11 @@ class DatetimeInput extends Component {
     this.handleOnChange = this.handleOnChange.bind(this)
   }
 
-  handleOnChange (dateMoment) {
-    this.props.onChange(dateMoment.toISOString())
+  handleOnChange (date) {
+    if (!date) return this.props.onChange() // invalid date, do not change
+    var momentDate = moment(date)
+    if (!momentDate.isValid()) return // invalid date, do not change
+    this.props.onChange(momentDate.toISOString())
   }
 
   render () {
@@ -24,6 +27,7 @@ class DatetimeInput extends Component {
         }
         <div className="control">
           <Datetime
+            open={true}
             value={moment(this.props.value)}
             renderInput={this.renderInput}
             onChange={this.handleOnChange}
@@ -35,10 +39,8 @@ class DatetimeInput extends Component {
     )
   }
 
-  renderInput (props) {
-    return (
-      <input {...props} />
-    )
+  renderInput () {
+    return null
   }
 }
 

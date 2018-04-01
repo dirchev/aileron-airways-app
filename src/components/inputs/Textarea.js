@@ -36,6 +36,7 @@ class Input extends Component {
             rows={this.props.rows}
             colums={this.props.columns}
             {...this.getEventHandlers()}
+            autoFocus={this.props.autoFocus}
           />
         </div>
         {/* <p className="help is-success">This username is available</p> */}

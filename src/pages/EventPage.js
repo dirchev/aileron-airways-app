@@ -6,6 +6,7 @@ import eventActions from '../action-creators/event'
 import EventOptionsButton from '../components/option-buttons/EventOptionsButton'
 import Navigation from '../components/Navigation'
 import EditableText from '../components/inputs/EditableText'
+import EditableTextArea from  '../components/inputs/EditableTextArea'
 
 
 class EventPage extends Component {
@@ -81,9 +82,9 @@ class EventPage extends Component {
                       : null
                   }
                   <span>
-                    <EditableText defaultValue={this.props.event.Description} onChange={this.handleDescriptionChange}>
+                    <EditableTextArea defaultValue={this.props.event.Description} onChange={this.handleDescriptionChange}>
                       {this.props.event.Description}
-                    </EditableText>
+                    </EditableTextArea>
                   </span>
                 </div>
               </div>

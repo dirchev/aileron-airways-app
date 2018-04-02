@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import uiActions from '../../../action-creators/ui'
 
 class EventOptionsButton extends Component {
   constructor () {
@@ -25,7 +27,10 @@ class EventOptionsButton extends Component {
 
   linkEvent (e) {
     e.preventDefault()
-    alert('not implemented')
+    this.props.openModal('linkEvent', {
+      EventId: this.props.event.Id,
+      TimelineId: this.props.event.TimelineId
+    })
   }
 
   deleteEvent (e) {
@@ -59,4 +64,12 @@ class EventOptionsButton extends Component {
   }
 }
 
-export default EventOptionsButton
+const mapDispatchToProps = function (dispatch, ownProps) {
+  return {
+    openModal: (name, props) => {
+      dispatch(uiActions.openModal(name, props))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(EventOptionsButton)

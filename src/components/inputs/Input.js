@@ -21,46 +21,52 @@ class Input extends Component {
     if (this.props.iconLeft) controlClassNames.push('has-icons-left')
     if (this.props.iconRight) controlClassNames.push('has-icons-right')
     controlClassNames = controlClassNames.join(' ')
-    return (
-      <div className="field">
+    var control = (
+      <div className={controlClassNames}>
+        <input
+          className="input"
+          type={this.props.type}
+          placeholder={this.props.placeholder}
+          value={this.props.value}
+          {...this.getEventHandlers()}
+          autoFocus={this.props.autoFocus}
+        />
         {
-          this.props.label
+          this.props.iconLeft
           ? (
-              <label className="label">{this.props.label}</label>
+            <span className="icon is-small is-left">
+              <i className={this.props.iconLeft}></i>
+            </span>
           )
           : null
         }
-        <div className={controlClassNames}>
-          <input
-            className="input"
-            type={this.props.type}
-            placeholder={this.props.placeholder}
-            value={this.props.value}
-            {...this.getEventHandlers()}
-            autoFocus={this.props.autoFocus}
-          />
-          {
-            this.props.iconLeft
-            ? (
-              <span className="icon is-small is-left">
-                <i className={this.props.iconLeft}></i>
-              </span>
-            )
-            : null
-          }
-          {
-            this.props.iconRight
-            ? (
-              <span className="icon is-small is-right">
-                <i className={this.props.iconRight}></i>
-              </span>
-            )
-            : null
-          }
-        </div>
-        {/* <p className="help is-success">This username is available</p> */}
+        {
+          this.props.iconRight
+          ? (
+            <span className="icon is-small is-right">
+              <i className={this.props.iconRight}></i>
+            </span>
+          )
+          : null
+        }
       </div>
     )
+    if (this.props.label) {
+      return (
+        <div className="field">
+          {
+            this.props.label
+            ? (
+                <label className="label">{this.props.label}</label>
+            )
+            : null
+          }
+          {control}
+        </div>
+      )
+    } else {
+      return control
+    }
   }
 }
 

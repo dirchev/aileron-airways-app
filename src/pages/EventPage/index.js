@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import moment from 'moment'
 import { Link, Redirect } from 'react-router-dom'
-import eventActions from '../action-creators/event'
-import EventOptionsButton from '../components/option-buttons/EventOptionsButton'
-import Navigation from '../components/Navigation'
-import EditableText from '../components/inputs/EditableText'
-import EditableTextArea from  '../components/inputs/EditableTextArea'
 
+import eventActions from '../../action-creators/event'
+import EventOptionsButton from '../../components/option-buttons/EventOptionsButton'
+import Navigation from '../../components/Navigation'
+import EventBox from './EventBox'
+import LinkedEventsMap from './LinkedEventsMap'
 
 class EventPage extends Component {
   constructor(props) {
@@ -62,32 +61,14 @@ class EventPage extends Component {
         <div className="container is-fluid">
           <div className="columns mt-lg">
             <div className="column is-one-quarter">
-              Linked Events Map Here
+              <LinkedEventsMap event={this.props.event} />
             </div>
             <div className="column">
-              <div className="card">
-                <div className="card-content">
-                  <div className="title">
-                    <EditableText defaultValue={this.props.event.Title} onChange={this.handleTitleChange}>
-                      {this.props.event.Title}
-                    </EditableText>
-                  </div>
-                  {
-                    this.props.event.EventDateTime
-                      ? (
-                        <div className="subtitle">
-                          <time className="subtitle">{moment(this.props.event.EventDateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</time>
-                        </div>
-                      )
-                      : null
-                  }
-                  <span>
-                    <EditableTextArea defaultValue={this.props.event.Description} onChange={this.handleDescriptionChange}>
-                      {this.props.event.Description}
-                    </EditableTextArea>
-                  </span>
-                </div>
-              </div>
+              <EventBox
+                event={this.props.event}
+                handleTitleChange={this.handleTitleChange}
+                handleDescriptionChange={this.handleDescriptionChange}
+              />
             </div>
           </div>
         </div>

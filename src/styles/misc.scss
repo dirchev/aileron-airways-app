@@ -5,3 +5,9 @@
   position: static !important;
   margin: 0 auto;
 }
+
+// Override bulma timeline styles
+.timeline .timeline-item .timeline-marker.is-danger.is-icon > i {
+  display: block;
+  text-align: center;
+}

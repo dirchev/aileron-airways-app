@@ -9,7 +9,7 @@ import { Link, Redirect } from 'react-router-dom'
 import Navigation from '../../components/Navigation'
 import CreateEventButton from '../../components/nav-items/CreateEventButton'
 import TimelineHeading from './TimelineHeading'
-import EventsList from '../../components/EventsList'
+import TimelineEvents from './TimelineEvents'
 import TimelineOptionsButton from '../../components/option-buttons/TimelineOptionsButton'
 
 class TimelinePage extends Component {
@@ -57,7 +57,7 @@ class TimelinePage extends Component {
             onTitleChange={this.handleTitleChange}
             timeline={this.props.timeline}
            />
-          <EventsList events={this.props.timeline.events} />
+          <TimelineEvents timeline={this.props.timeline} />
         </div>
         <TimelineOptionsButton deleteTimeline={this.props.deleteTimeline}/>
       </div>

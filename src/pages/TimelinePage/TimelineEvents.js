@@ -82,7 +82,7 @@ class TimelineEvents extends Component {
                 <span>List</span>
                 <span className="icon is-small"><i className="fa fa-list-ul"></i></span>
               </button>
-              <button onClick={this.handleChangeViewMode('calendar')} className={`button ${this.state.viewMode === 'calendar' ? 'is-primary': ''}`}>
+              <button onClick={this.handleChangeViewMode('calendar')} className={`button is-hidden-mobile ${this.state.viewMode === 'calendar' ? 'is-primary': ''}`}>
                 <span>Calendar</span>
                 <span className="icon is-small"><i className="fa fa-calendar"></i></span>
               </button>

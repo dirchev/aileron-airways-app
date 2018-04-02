@@ -26,15 +26,13 @@ class HomePage extends Component {
     return (
       <div>
         <Navigation {...this.getNavigationItems()}/>
-        <div className="container">
-          <div className="hero">
-            <div className="hero-body">
-              <div className="title">
-                <h1>Timelines</h1>
-              </div>
-              <div className="subtitle">
-                <p>{this.props.timelines.length} total timelines</p>
-              </div>
+        <div className="section">
+          <div className="mb-md">
+            <div className="title">
+              <h1>Timelines</h1>
+            </div>
+            <div className="subtitle">
+              <p>{this.props.timelines.length} total timelines</p>
             </div>
           </div>
           <div className="mb-lg">

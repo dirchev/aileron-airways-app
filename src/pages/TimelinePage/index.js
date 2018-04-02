@@ -52,11 +52,13 @@ class TimelinePage extends Component {
     return (
       <div>
         <Navigation {...this.getNavigationItems()}/>
-        <div className="container">
-          <TimelineHeading
-            onTitleChange={this.handleTitleChange}
-            timeline={this.props.timeline}
-           />
+        <div className="section">
+          <div className="mb-md">
+            <TimelineHeading
+              onTitleChange={this.handleTitleChange}
+              timeline={this.props.timeline}
+            />
+          </div>
           <TimelineEvents timeline={this.props.timeline} />
         </div>
         <TimelineOptionsButton deleteTimeline={this.props.deleteTimeline}/>

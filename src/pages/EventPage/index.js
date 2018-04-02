@@ -58,8 +58,8 @@ class EventPage extends Component {
       <div className="mb-lg">
         <Navigation {...this.getNavigationItems()} />
         <EventOptionsButton event={this.props.event} deleteEvent={this.props.deleteEvent} />
-        <div className="container is-fluid">
-          <div className="columns mt-lg">
+        <div className="section">
+          <div className="columns">
             <div className="column is-one-quarter">
               <LinkedEventsMap event={this.props.event} />
             </div>

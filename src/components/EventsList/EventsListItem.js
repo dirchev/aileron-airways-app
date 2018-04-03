@@ -6,28 +6,16 @@ import { Link } from 'react-router-dom'
 class EventsListItem extends Component {
   render() {
     return (
-      <Link to={`/event/${this.props.Id}`}>
-        <div className="card">
-          <div className="card-content">
-            <div className="media">
-              <div className="media-content">
-                <h3 className="title">{this.props.Title}</h3>
-                  {
-                    this.props.EventDateTime
-                    ? (
-                      <time className="subtitle">{moment(this.props.EventDateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</time>
-                    )
-                    : null
-                  }
-              </div>
-            </div>
-          </div>
-          <div className="card-content">
-            <div className="content">
-              {this.props.Description}
-            </div>
-          </div>
-        </div>
+      <Link to={`/event/${this.props.Id}`} className="box is-primary mb-sm">
+        <h3 className="is-size-5">
+          <span>{this.props.Title}</span>
+          {
+            this.props.EventDateTime
+            ? (<span className="ml-sm is-size-7 has-text-grey">{moment(this.props.EventDateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</span>)
+            : null
+          }
+        </h3>
+        <p>{this.props.Description}</p>
       </Link>
     )
   }

@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import EditableText from '../../components/inputs/EditableText'
 import EditableTextArea from  '../../components/inputs/EditableTextArea'
+import DatetimeInput from '../../components/inputs/DatetimeInput'
+import EditableDatetime from '../../components/inputs/EditableDatetime'
 
 class EventBox extends Component {
   render() {
@@ -15,15 +17,22 @@ class EventBox extends Component {
             </EditableText>
           </div>
           {
+            
             this.props.event.EventDateTime
               ? (
+
                 <div className="subtitle">
+                <EditableDatetime 
+                onChange={this.handleDatetimeChange}
+                >
                   <time>
                     {moment(this.props.event.EventDateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}
                   </time>
+                  </EditableDatetime>
                 </div>
               )
               : null
+              
           }
           <span>
             <EditableTextArea

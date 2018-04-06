@@ -7,6 +7,13 @@ import DatetimeInput from '../../components/inputs/DatetimeInput'
 import EditableDatetime from '../../components/inputs/EditableDatetime'
 
 class EventBox extends Component {
+  // handleDatetimeChange (newDatetime) {
+  //   this.props.changeEventDatetime({
+  //     ...this.props.event,
+  //     Datetime: newDatetime
+  //   })
+  // }
+
   render() {
     return (
       <div className="card">
@@ -23,11 +30,13 @@ class EventBox extends Component {
 
                 <div className="subtitle">
                 <EditableDatetime 
+                defaultValue={this.props.event.Datetime}
                 onChange={this.handleDatetimeChange}
                 >
                   <time>
                     {moment(this.props.event.EventDateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}
                   </time>
+                  {this.props.event.Datetime}
                   </EditableDatetime>
                 </div>
               )

@@ -78,6 +78,30 @@ export default {
         })
     }
   },
+/////////////////////YOU ARE HERE WORK WITH ^^^^^^^ NEARLY GOT IT////////
+  editDatetime: function (eventData) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.event.START_EDIT_EVENT_DESCRIPTION,
+        data: eventData
+      })
+
+      SDK.TimelineEvents.editDescription(eventData.Id, eventData.Description)
+        .then((response) => {
+          dispatch({
+            type: actions.event.SUCCESS_EDIT_EVENT_DESCRIPTION,
+            data: eventData
+          })
+        })
+        .catch((error) => {
+          dispatch({
+            type: actions.timeline.ERROR_EDIT_EVENT_DESCRIPTION,
+            data: eventData,
+            error: error
+          })
+        })
+    }
+  },
 
 
   fetchForTimeline: function (timelineId) {

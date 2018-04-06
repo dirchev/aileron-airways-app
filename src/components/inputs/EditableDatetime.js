@@ -13,7 +13,7 @@ class EditableDatetime extends Component {
     value: this.props.value
     }
     //this.renderInput = this.renderInput.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    //this.handleChange = this.handleChange.bind(this)
 
     this.enableEditMode = this.enableEditMode.bind(this)
     this.handleChange = this.handleChange.bind(this)

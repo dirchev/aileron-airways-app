@@ -18,6 +18,7 @@ class EventPage extends Component {
     }
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
+    this.handleDatetimeChange = this.handleDatetimeChange.bind(this)
   }
 
   getNavigationItems() {
@@ -50,6 +51,13 @@ class EventPage extends Component {
     })
   }
 
+  handleDatetimeChange(newDatetime) {
+    this.props.changeEventDatetime({
+      ...this.props.event,
+      Datetime: newDatetime
+    })
+  }
+
   render() {
     if (!this.props.event) {
       return (<Redirect to={this.timelineId ? `/timeline/${this.timelineId}` : '/'} />)
@@ -68,6 +76,7 @@ class EventPage extends Component {
                 event={this.props.event}
                 handleTitleChange={this.handleTitleChange}
                 handleDescriptionChange={this.handleDescriptionChange}
+                handleDatetimeChange={this.handleDatetimeChange}
               />
             </div>
           </div>
@@ -90,6 +99,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     changeEventDescription: function (eventData) {
       dispatch(eventActions.editDescription(eventData))
+    },
+    changeEventDatetime: function (eventData) {
+      dispatch(eventActions.editDatetime(eventData))
     },
     deleteEvent: (eventId, timelineId) => {
       dispatch(eventActions.delete(eventId, timelineId))

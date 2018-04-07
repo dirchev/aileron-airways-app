@@ -4,6 +4,7 @@ import moment from 'moment'
 import EditableText from '../../components/inputs/EditableText'
 import EditableTextArea from  '../../components/inputs/EditableTextArea'
 import EventMap from '../../components/EventMap'
+import EditableLocation from '../../components/inputs/EditableLocation'
 
 class EventBox extends Component {
   getCoords (event) {
@@ -42,18 +43,15 @@ class EventBox extends Component {
               {this.props.event.Description}
             </EditableTextArea>
           </span>
-          {
-            this.props.event.Location
-            ? (
-              <span>
-                <EventMap
-                  {...this.getCoords(this.props.event)}
-                  showMarker
-                />
-              </span>
-            )
-            : null
-          }
+          <div className="mt-md">
+            <EditableLocation defaultValue={this.props.event.Location} onChange={this.props.handleLocationChange}>
+              {
+                this.props.event.Location
+                ? (<EventMap {...this.getCoords(this.props.event)} />)
+                : null
+              }
+            </EditableLocation>
+          </div>
         </div>
       </div>
     )

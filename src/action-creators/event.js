@@ -55,6 +55,7 @@ export default {
         })
     }
   },
+
   editDescription: function (eventData) {
     return function (dispatch) {
       dispatch({
@@ -79,6 +80,29 @@ export default {
     }
   },
 
+  editLocation: function (eventData) {
+    return function (dispatch) {
+      dispatch({
+        type: actions.event.START_EDIT_EVENT_LOCATION,
+        data: eventData
+      })
+
+      SDK.TimelineEvents.editLocation(eventData.Id, eventData.Location)
+        .then((response) => {
+          dispatch({
+            type: actions.event.SUCCESS_EDIT_EVENT_LOCATION,
+            data: eventData
+          })
+        })
+        .catch((error) => {
+          dispatch({
+            type: actions.timeline.ERROR_EDIT_EVENT_LOCATION,
+            data: eventData,
+            error: error
+          })
+        })
+    }
+  },
 
   fetchForTimeline: function (timelineId) {
     return function (dispatch) {

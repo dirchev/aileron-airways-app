@@ -3,8 +3,18 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import EditableText from '../../components/inputs/EditableText'
 import EditableTextArea from  '../../components/inputs/EditableTextArea'
+import EventMap from '../../components/EventMap'
+import EditableLocation from '../../components/inputs/EditableLocation'
 
 class EventBox extends Component {
+  getCoords (event) {
+    var location = event.Location.split(',')
+    return {
+      lat: parseFloat(location[0]),
+      lng: parseFloat(location[1])
+    }
+  }
+
   render() {
     return (
       <div className="card">
@@ -33,6 +43,15 @@ class EventBox extends Component {
               {this.props.event.Description}
             </EditableTextArea>
           </span>
+          <div className="mt-md">
+            <EditableLocation defaultValue={this.props.event.Location} onChange={this.props.handleLocationChange}>
+              {
+                this.props.event.Location
+                ? (<EventMap {...this.getCoords(this.props.event)} />)
+                : null
+              }
+            </EditableLocation>
+          </div>
         </div>
       </div>
     )

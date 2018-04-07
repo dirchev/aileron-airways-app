@@ -6,6 +6,7 @@ export default function eventsReducer(state = defaultState, action) {
     case 'START_CREATE_EVENT':
     case 'START_EDIT_EVENT_TITLE':
     case 'START_EDIT_EVENT_DESCRIPTION':
+    case 'START_EDIT_EVENT_LOCATION':
       return {
         ...state,
         [action.data.Id]: {
@@ -17,6 +18,7 @@ export default function eventsReducer(state = defaultState, action) {
       case 'SUCCESS_CREATE_EVENT':
       case 'SUCCESS_EDIT_EVENT_TITLE':
       case 'SUCCESS_EDIT_EVENT_DESCRIPTION':
+      case 'SUCCESS_EDIT_EVENT_LOCATION':
       case 'START_DELETE_EVENT':
       return {
         ...state,
@@ -28,6 +30,7 @@ export default function eventsReducer(state = defaultState, action) {
       }
     case 'ERROR_EDIT_EVENT_TITLE':
     case 'ERROR_EDIT_EVENT_DESCRIPTION':
+    case 'ERROR_EDIT_EVENT_LOCATION':
     case 'ERROR_CREATE_EVENT':
       return {
         ...state,

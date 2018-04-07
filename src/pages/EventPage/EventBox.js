@@ -3,8 +3,17 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import EditableText from '../../components/inputs/EditableText'
 import EditableTextArea from  '../../components/inputs/EditableTextArea'
+import EventMap from '../../components/EventMap'
 
 class EventBox extends Component {
+  getCoords (event) {
+    var location = event.Location.split(',')
+    return {
+      lat: parseFloat(location[0]),
+      lng: parseFloat(location[1])
+    }
+  }
+
   render() {
     return (
       <div className="card">
@@ -33,6 +42,18 @@ class EventBox extends Component {
               {this.props.event.Description}
             </EditableTextArea>
           </span>
+          {
+            this.props.event.Location
+            ? (
+              <span>
+                <EventMap
+                  {...this.getCoords(this.props.event)}
+                  showMarker
+                />
+              </span>
+            )
+            : null
+          }
         </div>
       </div>
     )

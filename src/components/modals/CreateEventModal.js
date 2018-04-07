@@ -6,6 +6,7 @@ import eventActions from '../../action-creators/event'
 import Input from '../inputs/Input'
 import DatetimeInput from '../inputs/DatetimeInput'
 import Textarea from '../inputs/Textarea'
+import LocationInput from '../inputs/LocationInput'
 
 class CreateEventModal extends Component {
   constructor() {
@@ -14,6 +15,7 @@ class CreateEventModal extends Component {
       title: '',
       description: '',
       eventDateTime: '',
+      location: ''
     }
 
     this.onChange = this.onChange.bind(this)
@@ -32,7 +34,8 @@ class CreateEventModal extends Component {
       TimelineId: this.props.timelineId,
       Title: this.state.title,
       Description: this.state.description,
-      EventDateTime: this.state.eventDateTime ? moment(this.state.eventDateTime).toISOString() : null
+      EventDateTime: this.state.eventDateTime ? moment(this.state.eventDateTime).toISOString() : null,
+      Location: this.state.location
     })
     this.props.onClose()
   }
@@ -67,6 +70,12 @@ class CreateEventModal extends Component {
                   value={this.state.eventDateTime}
                   label="Date and Time"
                   placeholder="Please enter the date and time of the event..."
+                />
+                <LocationInput
+                  onChange={this.onChange('location')}
+                  value={this.state.location}
+                  label="Location"
+                  placeholder="Please enter the location of the event..."
                 />
                 <div className="field is-grouped">
                   <div className="control">

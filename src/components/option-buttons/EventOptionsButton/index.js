@@ -22,7 +22,9 @@ class EventOptionsButton extends Component {
 
   attachFile (e) {
     e.preventDefault()
-    alert('not implemented')
+    this.props.openModal('createAttachment', {
+      EventId: this.props.event.Id
+    })
   }
 
   linkEvent (e) {

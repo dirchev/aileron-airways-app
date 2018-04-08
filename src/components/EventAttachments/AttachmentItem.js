@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import swal from 'sweetalert2'
 
 class AttachmentItem extends Component {
   constructor () {
@@ -9,7 +10,19 @@ class AttachmentItem extends Component {
 
   handleDelete (e) {
     e.preventDefault()
-    this.props.deleteAttachment()
+    swal({
+      type: 'warning',
+      text: 'Are you sure you want to delete this attachment?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete',
+      cancelButtonText: 'No, Cancel',
+      reverseButtons: true
+    })
+      .then((result) => {
+        if (!result.value) return
+        this.props.deleteAttachment()
+      })
+      .catch(swal.noop)
   }
 
   render () {

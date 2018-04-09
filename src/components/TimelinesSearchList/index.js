@@ -8,11 +8,11 @@ import Pagination from '../Pagination'
 import TimelineItem from './TimelineItem'
 
 const FUSE_OPTIONS = {
+  includeMatches: true,
   keys: [
-    {name: 'Title', weight: 0.5}
-    // TODO enable these when we fetch all timelines and events
-    /* {name: 'events.Title', weight: 0.4}*/
-    /* {name: 'events.Description', weight: 0.3}*/
+    {name: 'Title', weight: 0.7},
+    {name: 'events.Title', weight: 0.6},
+    {name: 'events.Description', weight: 0.4}
   ]
 }
 
@@ -20,30 +20,14 @@ class TimelinesSearchList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      timelines: props.timelines,
-      page: 1
+      page: 1,
+      searchResults: []
     }
     this.handlePageChange = this.handlePageChange.bind(this)
-    this.fuseSearch = new Fuse(this.state.timelines, FUSE_OPTIONS)
   }
 
   handlePageChange (page) {
     this.setState({page})
-  }
-
-  // every time there are new props - we need to re-calculate the search results
-  componentWillReceiveProps (nextProps) {
-    // the timelines array has been changed. re-initialize the search
-    if (_.isEqual(this.props.timelines, nextProps.timelines)) {
-      this.fuseSearch = new Fuse(nextProps.timelines, FUSE_OPTIONS)
-    }
-
-    // the filter is changed. update results
-    if (this.props.timelinesFilter !== nextProps.timelinesFilter) {
-      this.setState({
-        timelines: this.fuseSearch.search(nextProps.timelinesFilter)
-      })
-    }
   }
 
   render() {
@@ -54,16 +38,27 @@ class TimelinesSearchList extends Component {
           Showing results for "{this.props.timelinesFilter}"
         </div>
         {
-          this.state.timelines.slice(0 + skip, 10 + skip).map(function (timeline) {
-            return <TimelineItem key={timeline.Id} timeline={timeline}/>
+          this.state.searchResults.slice(0 + skip, 10 + skip).map(function (searchResult) {
+            return <TimelineItem key={searchResult.item.Id} searchResult={searchResult}/>
           })
         }
         <Pagination
           page={this.state.page}
-          pages={Math.ceil(this.state.timelines.length / 10)}
+          pages={Math.ceil(this.state.searchResults.length / 10)}
           onPageChange={this.handlePageChange} />
       </div>
     )
+  }
+}
+
+TimelinesSearchList.getDerivedStateFromProps = function (nextProps) {
+  // the timelines array has been changed. re-initialize the search
+  var fuseSearch = new Fuse(nextProps.timelines, FUSE_OPTIONS)
+
+  // the filter is changed. update results
+  return {
+    page: 1,
+    searchResults: fuseSearch.search(nextProps.timelinesFilter)
   }
 }
 
@@ -77,6 +72,13 @@ const mapStateToProps = (state) => {
   var timelines = _
     .chain(state.timelines) // lodash chain
     .values() // get array
+    // attach events to timeline.events
+    .map(function (timeline) {
+      return {
+        ...timeline,
+        events: _.chain(state.events).values().filter({TimelineId: timeline.Id}).value()
+      }
+    })
     .value() // end of chain
   return {
     timelines: timelines,

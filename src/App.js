@@ -64,7 +64,12 @@ class App extends Component {
 
   render() {
     if (!this.state.storeLoaded) return (
-      <div className="pageloader"><span className="title">Pageloader</span></div>
+      <div className="pageloader is-active">
+        <div className="title has-text-centered is-size-4">
+          Aileron Airways Milestone App <br/>
+          Team 7
+        </div>
+      </div>
     )
     return (
       <Provider store={store(this.state.initialStoreState)}>

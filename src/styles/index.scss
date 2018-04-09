@@ -1,7 +1,6 @@
 @import './colours.scss';
 @import './helpers.scss';
 @import './page-options.scss';
-@import './misc.scss';
 
 // Bulma
 @import '../../node_modules/bulma/bulma.sass';
@@ -9,3 +8,5 @@
 @import '../../node_modules/bulma-extensions/bulma-calendar/dist/bulma-calendar.sass';
 @import '../../node_modules/bulma-extensions/bulma-timeline/dist/bulma-timeline.sass';
 @import '../../node_modules/bulma-extensions/bulma-pageloader/dist/bulma-pageloader.sass';
+
+@import './misc.scss';

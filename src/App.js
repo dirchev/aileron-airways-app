@@ -65,7 +65,7 @@ class App extends Component {
   render() {
     if (!this.state.storeLoaded) return (
       <div className="pageloader is-active">
-        <div className="title has-text-centered is-size-4">
+        <div className="title has-text-centered">
           Aileron Airways Milestone App <br/>
           Team 7
         </div>

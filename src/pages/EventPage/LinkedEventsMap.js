@@ -110,7 +110,7 @@ var mapStateToProps = function (state, ownProps) {
     return link.TimelineEventId === eventId
   }).map(function (link) {
     return state.events[link.LinkedToTimelineEventId]
-  })
+  }).filter((e) => e) // remove deleted events
 
   var items = _.chain(links.concat(ownProps.event)).sortBy(function (event) {
     return moment(event.EventDateTime).toISOString()

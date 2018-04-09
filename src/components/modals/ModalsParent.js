@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import CreateTimelineModal from './CreateTimelineModal'
 import CreateEventModal from './CreateEventModal'
 import LinkEventModal from './LinkEventModal'
+import CreateAttachmentModal from './CreateAttachmentModal'
 
 import uiActions from '../../action-creators/ui'
 
 const modalsMap = {
   'createTimeline': CreateTimelineModal,
   'createEvent': CreateEventModal,
-  'linkEvent': LinkEventModal
+  'linkEvent': LinkEventModal,
+  'createAttachment': CreateAttachmentModal
 }
 
 class ModalsParent extends Component {

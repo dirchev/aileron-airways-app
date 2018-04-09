@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
-
 import eventActions from '../../action-creators/event'
+
+import EventAttachments from '../../components/EventAttachments'
 import EventOptionsButton from '../../components/option-buttons/EventOptionsButton'
 import Navigation from '../../components/Navigation'
 import EventBox from './EventBox'
@@ -78,6 +79,7 @@ class EventPage extends Component {
                 handleDescriptionChange={this.handleDescriptionChange}
                 handleLocationChange={this.handleLocationChange}
               />
+              <EventAttachments event={this.props.event} />
             </div>
           </div>
         </div>

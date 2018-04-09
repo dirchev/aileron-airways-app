@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import uiActions from '../../../action-creators/ui'
+import swal from 'sweetalert2'
 
 class EventOptionsButton extends Component {
   constructor () {
@@ -22,7 +23,9 @@ class EventOptionsButton extends Component {
 
   attachFile (e) {
     e.preventDefault()
-    alert('not implemented')
+    this.props.openModal('createAttachment', {
+      EventId: this.props.event.Id
+    })
   }
 
   linkEvent (e) {
@@ -35,7 +38,19 @@ class EventOptionsButton extends Component {
 
   deleteEvent (e) {
     e.preventDefault()
-    this.props.deleteEvent(this.props.event.Id, this.props.event.TimelineId)
+    swal({
+      type: 'warning',
+      text: 'Are you sure you want to delete this event?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete',
+      cancelButtonText: 'No, Cancel',
+      reverseButtons: true
+    })
+      .then((result) => {
+        if (!result.value) return
+        this.props.deleteEvent(this.props.event.Id, this.props.event.TimelineId)
+      })
+      .catch(swal.noop)
   }
 
   render() {

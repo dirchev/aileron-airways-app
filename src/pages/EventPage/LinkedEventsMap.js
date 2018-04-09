@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import moment from 'moment'
 import eventActions from '../../action-creators/event'
+import swal from 'sweetalert2'
 
 class LinkedEventsMap extends Component {
   constructor () {
@@ -24,7 +25,20 @@ class LinkedEventsMap extends Component {
   unlinkEvent (eventId) {
     return (e) => {
       e.preventDefault()
-      this.props.unlinkEvent(eventId)
+
+      swal({
+        type: 'warning',
+        text: 'Are you sure you want to unlink this event?',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Unlink',
+        cancelButtonText: 'No, Cancel',
+        reverseButtons: true
+      })
+        .then((result) => {
+          if (!result.value) return
+          this.props.unlinkEvent(eventId)
+        })
+        .catch(swal.noop)
     }
   }
 
@@ -110,7 +124,7 @@ var mapStateToProps = function (state, ownProps) {
     return link.TimelineEventId === eventId
   }).map(function (link) {
     return state.events[link.LinkedToTimelineEventId]
-  })
+  }).filter((e) => e) // remove deleted events
 
   var items = _.chain(links.concat(ownProps.event)).sortBy(function (event) {
     return moment(event.EventDateTime).toISOString()

@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://aileron-airways-app.herokuapp.com/",
   "dependencies": {
-    "bulma": "git://github.com/jgthms/bulma#master",
+    "bulma": "git+https://github.com/jgthms/bulma.git",
     "bulma-extensions": "1.0.13",
     "classnames": "2.2.5",
     "font-awesome": "4.7.0",

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import swal from 'sweetalert2'
 
 class TimelineOptionsButton extends Component {
   constructor () {
@@ -18,7 +19,19 @@ class TimelineOptionsButton extends Component {
 
   deleteTimeline (e) {
     e.preventDefault()
-    this.props.deleteTimeline()
+    swal({
+      type: 'warning',
+      text: 'Are you sure you want to delete this timeline?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete',
+      cancelButtonText: 'No, Cancel',
+      reverseButtons: true
+    })
+      .then((result) => {
+        if (!result.value) return
+        this.props.deleteTimeline()
+      })
+      .catch(swal.noop)
   }
 
   render() {

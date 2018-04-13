@@ -15,6 +15,7 @@ export default function eventLinksReducer(state = defaultState, action) {
           synced: false
         }
       ]
+    case 'SYNC_EVENTLINK':
     case 'SUCCESS_LINK_EVENT':
       return state.map(function (link) {
         // if this is not the particular link - do not change

@@ -35,6 +35,7 @@ export default function eventLinksReducer(state = defaultState, action) {
           synced: false
         }
       }
+    case 'SYNC_ATTACHMENT':
     case 'SUCCESS_CREATE_ATTACHMENT':
       return {
         ...state,

@@ -15,6 +15,7 @@ export default function timelinesReducer (state = defaultState, action) {
       }
     case 'SUCCESS_CREATE_TIMELINE':
     case 'SUCCESS_EDIT_TIMELINE':
+    case 'SYNC_TIMELINE':
       return {
         ...state,
         [action.data.Id]: {

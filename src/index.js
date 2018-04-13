@@ -10,5 +10,14 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+import { Provider } from 'react-redux'
+import store from './store'
+
+var toRender = (
+  <Provider store={store}>
+    <App loadDataOnStart />
+  </Provider>
+)
+
+ReactDOM.render(toRender, document.getElementById('root'))
 registerServiceWorker()

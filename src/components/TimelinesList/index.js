@@ -4,7 +4,7 @@ import Timeline from './TimelineListItem'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-class TimelinesList extends Component {
+export class TimelinesList extends Component {
   render() {
     return (
       <div className="columns is-multiline">
@@ -21,7 +21,7 @@ class TimelinesList extends Component {
 }
 
 TimelinesList.propTypes = {
-  timelines: PropTypes.array
+  timelines: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => {

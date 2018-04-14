@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import Map from './Map'
 import { Marker } from "react-google-maps"
@@ -50,6 +51,11 @@ class EventMap extends Component {
       </div>
     )
   }
+}
+
+EventMap.propTypes = {
+  lat: PropTypes.string.isRequired,
+  lng: PropTypes.string.isRequired,
 }
 
 export default EventMap

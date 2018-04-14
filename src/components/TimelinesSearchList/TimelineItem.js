@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import moment from 'moment'
 import _ from 'lodash'
@@ -57,6 +58,26 @@ class TimelineItem extends Component {
       </div>
     )
   }
+}
+
+TimelineItem.propTypes = {
+  searchResult: PropTypes.shape({
+    item: PropTypes.shape({
+      Id: PropTypes.string.isRequired,
+      Title: PropTypes.string.isRequired,
+      events: PropTypes.arrayOf(PropTypes.shape({
+        Id: PropTypes.string.isRequired,
+        Title: PropTypes.string.isRequired,
+        Description: PropTypes.string.isRequired
+      }))
+    }).isRequired,
+    matches: PropTypes.arrayOf(PropTypes.shape({
+      arrayIndex: PropTypes.number.isRequired,
+      indices: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+      key: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    }))
+  }).isRequired
 }
 
 export default TimelineItem

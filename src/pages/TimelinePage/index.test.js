@@ -64,7 +64,7 @@ it('renders additional components', function () {
 
   const wrapper = shallow(<TimelinePage {...props} />)
   expect(wrapper.find(Navigation).length).toEqual(1)
-  expect(wrapper.find(Navigation).prop('actionsLeft')).toBeDefined()
+  expect(wrapper.find(Navigation).prop('actions')).toBeDefined()
 
   expect(wrapper.find(TimelineHeading).length).toEqual(1)
   expect(wrapper.find(TimelineHeading).prop('timeline')).toEqual(props.timeline)

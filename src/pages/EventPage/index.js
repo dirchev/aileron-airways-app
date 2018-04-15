@@ -26,16 +26,22 @@ export class EventPage extends Component {
   getNavigationItems() {
     var backButton = (
       <Link to={this.timelineId ? `/timeline/${this.timelineId}` : '/'}
-        className="navbar-item"
-        href=""
-        key="back-button">
+        className="navbar-item" key="back-button">
         <i className="fa fa-chevron-left mr-sm"></i>
         Back
       </Link>
     )
 
+    var homeButton = (
+      <Link to={`/`}
+        className="navbar-item" key="home-button">
+        <i className="fa fa-home mr-sm"></i>
+        Home
+      </Link>
+    )
+
     return {
-      actionsLeft: [backButton],
+      actions: [backButton, homeButton],
     }
   }
 
@@ -68,7 +74,7 @@ export class EventPage extends Component {
       <div className="mb-lg">
         <Navigation {...this.getNavigationItems()} />
         <EventOptionsButton event={this.props.event} deleteEvent={this.props.deleteEvent} />
-        <div className="section">
+        <div className="section mt-lg">
           <div className="columns">
             <div className="column is-one-quarter">
               <LinkedEventsMap event={this.props.event} />

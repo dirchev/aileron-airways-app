@@ -21,14 +21,15 @@ export class TimelinePage extends Component {
 
   getNavigationItems () {
     var backButton = (
-      <Link to='/' className="navbar-item" href="" key="back-button">
-        <i className="fa fa-chevron-left mr-sm"></i>
-        Back
+      <Link to={`/`}
+        className="navbar-item" key="home-button">
+        <i className="fa fa-home mr-sm"></i>
+        Home
       </Link>
     )
 
     return {
-      actionsLeft: [backButton]
+      actions: [backButton]
     }
   }
 
@@ -50,7 +51,7 @@ export class TimelinePage extends Component {
     return (
       <div>
         <Navigation {...this.getNavigationItems()}/>
-        <div className="section">
+        <div className="section mt-lg">
           <div className="mb-md">
             <TimelineHeading
               onTitleChange={this.handleTitleChange}

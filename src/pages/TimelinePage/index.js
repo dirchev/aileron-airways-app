@@ -4,10 +4,10 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import timelineActions from '../../action-creators/timeline'
 import eventActions from '../../action-creators/event'
+import uiActions from '../../action-creators/ui'
 
 import { Link, Redirect } from 'react-router-dom'
 import Navigation from '../../components/Navigation'
-import CreateEventButton from '../../components/nav-items/CreateEventButton'
 import TimelineHeading from './TimelineHeading'
 import TimelineEvents from './TimelineEvents'
 import TimelineOptionsButton from '../../components/option-buttons/TimelineOptionsButton'
@@ -27,10 +27,7 @@ class TimelinePage extends Component {
     )
 
     return {
-      actionsLeft: [backButton],
-      actionsRight: [
-        <CreateEventButton timeline={this.props.timeline} key="create-event"/>
-      ]
+      actionsLeft: [backButton]
     }
   }
 
@@ -61,7 +58,10 @@ class TimelinePage extends Component {
           </div>
           <TimelineEvents timeline={this.props.timeline} />
         </div>
-        <TimelineOptionsButton deleteTimeline={this.props.deleteTimeline}/>
+        <TimelineOptionsButton
+          deleteTimeline={this.props.deleteTimeline}
+          createEvent={this.props.createEvent}
+        />
       </div>
     )
   }
@@ -99,6 +99,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchEvents: () => {
       dispatch(eventActions.fetchForTimeline(ownProps.match.params.Id))
     },
+    createEvent: () => {
+      dispatch(uiActions.openModal('createEvent', {timelineId: ownProps.match.params.Id}))
+    }
   }
 }
 

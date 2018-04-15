@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import moment from 'moment'
-import eventActions from '../../action-creators/event'
 import swal from 'sweetalert2'
 
-class LinkedEventsMap extends Component {
+import eventActions from '../../action-creators/event'
+
+export class LinkedEventsMap extends Component {
   constructor () {
     super()
     this.state = {
@@ -116,6 +118,15 @@ class LinkedEventsMap extends Component {
       )
     })
   }
+}
+
+LinkedEventsMap.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+  })).isRequired,
+  getLinkedEvents: PropTypes.func.isRequired,
+  unlinkEvent: PropTypes.func.isRequired
 }
 
 var mapStateToProps = function (state, ownProps) {

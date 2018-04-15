@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import Map from '../EventMap/Map'
 import { Marker } from 'react-google-maps'
@@ -136,6 +137,12 @@ class LocationInput extends Component {
     }
     return elements
   }
+}
+
+LocationInput.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
 
 export default LocationInput

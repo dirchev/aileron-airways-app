@@ -8,7 +8,7 @@ import DatetimeInput from '../inputs/DatetimeInput'
 import Textarea from '../inputs/Textarea'
 import LocationInput from '../inputs/LocationInput'
 
-class CreateEventModal extends Component {
+export class CreateEventModal extends Component {
   constructor() {
     super()
     this.state = {

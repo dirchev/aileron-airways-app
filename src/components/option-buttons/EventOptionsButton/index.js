@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uiActions from '../../../action-creators/ui'
 import swal from 'sweetalert2'
 
-class EventOptionsButton extends Component {
+export class EventOptionsButton extends Component {
   constructor () {
     super()
     this.state = {
@@ -77,6 +78,15 @@ class EventOptionsButton extends Component {
       </div>
     )
   }
+}
+
+EventOptionsButton.propTypes = {
+  event: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    TimelineId: PropTypes.string.isRequired,
+  }).isRequired,
+  openModal: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = function (dispatch, ownProps) {

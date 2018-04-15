@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 import moment from 'moment'
+
 import EditableText from '../../components/inputs/EditableText'
 import EditableTextArea from  '../../components/inputs/EditableTextArea'
 import EventMap from '../../components/EventMap'
@@ -56,6 +57,21 @@ class EventBox extends Component {
       </div>
     )
   }
+}
+
+EventBox.propTypes = {
+  event: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    TimelineEventId: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    EventDateTime: PropTypes.string.isRequired,
+    Location: PropTypes.string.isRequired,
+  }).isRequired,
+  handleTitleChange: PropTypes.func.isRequired,
+  handleDescriptionChange: PropTypes.func.isRequired,
+  handleEventDateTimeChange: PropTypes.func.isRequired,
+  handleLocationChange: PropTypes.func.isRequired,
 }
 
 export default EventBox

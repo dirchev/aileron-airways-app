@@ -54,8 +54,8 @@ class EventMap extends Component {
 }
 
 EventMap.propTypes = {
-  lat: PropTypes.string.isRequired,
-  lng: PropTypes.string.isRequired,
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired,
 }
 
 export default EventMap

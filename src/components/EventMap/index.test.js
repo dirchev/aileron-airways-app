@@ -5,8 +5,8 @@ import { shallow } from 'enzyme'
 
 it('renders without error', () => {
   const props = {
-    lat: '41.100000',
-    lng: '20.100000'
+    lat: 41.100000,
+    lng: 20.100000
   }
   var Geocoder = jest.fn()
   Geocoder.prototype.geocode = jest.fn()
@@ -22,8 +22,8 @@ it('renders without error', () => {
 
 it('shows a marker', () => {
   const props = {
-    lat: '41.100000',
-    lng: '20.100000'
+    lat: 41.100000,
+    lng: 20.100000
   }
   var Geocoder = jest.fn()
   Geocoder.prototype.geocode = jest.fn()
@@ -40,8 +40,8 @@ it('shows a marker', () => {
 
 it('generates place address', () => {
   const props = {
-    lat: '41.100000',
-    lng: '20.100000'
+    lat: 41.100000,
+    lng: 20.100000
   }
   var Geocoder = jest.fn()
   Geocoder.prototype.geocode = jest.fn()

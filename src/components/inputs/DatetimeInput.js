@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Datetime from 'react-datetime'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import _ from 'lodash'
 
 class DatetimeInput extends Component {
   constructor () {
     super()
-    this.renderInput = this.renderInput.bind(this)
     this.handleOnChange = this.handleOnChange.bind(this)
   }
 
@@ -38,10 +38,14 @@ class DatetimeInput extends Component {
       </div>
     )
   }
+}
 
-  renderInput () {
-    return null
-  }
+DatetimeInput.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  defaultValue: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 DatetimeInput.defaultProps = {

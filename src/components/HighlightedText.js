@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 class HighlightedText extends Component {
@@ -28,6 +29,11 @@ class HighlightedText extends Component {
       </span>
     )
   }
+}
+
+HighlightedText.propTypes = {
+  children: PropTypes.string.isRequired,
+  matches: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired
 }
 
 export default HighlightedText

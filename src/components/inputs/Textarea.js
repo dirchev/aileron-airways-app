@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Input extends Component {
+class Textarea extends Component {
   getEventHandlers () {
     var wrap = function (handler) {
       return (event) => {
@@ -10,9 +10,6 @@ class Input extends Component {
     }
     var eventHandlers = {}
     if (this.props.onChange) eventHandlers.onChange = wrap(this.props.onChange)
-    if (this.props.onKeyUp) eventHandlers.onKeyUp = wrap(this.props.onKeyUp)
-    if (this.props.onKeyDown) eventHandlers.onKeyDown = wrap(this.props.onKeyDown)
-    if (this.props.onKeyPress) eventHandlers.onKeyPress = wrap(this.props.onKeyPress)
     return eventHandlers
   }
 
@@ -45,10 +42,10 @@ class Input extends Component {
   }
 }
 
-Input.defaultProps = {
+Textarea.defaultProps = {
   className: '',
   type: 'text',
   value: null
 }
 
-export default Input
+export default Textarea

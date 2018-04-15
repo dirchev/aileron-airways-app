@@ -16,7 +16,7 @@ class Pagination extends Component {
 
   render() {
     // if there is only one page - no need to show anything
-    if (this.props.pages === 1) return null
+    if (this.props.pages <= 1) return null
     return (
       <nav className="pagination is-centered">
         {

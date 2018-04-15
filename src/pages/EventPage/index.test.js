@@ -62,8 +62,11 @@ it('render additional components', function () {
     event: props.event
   })
 
-  expect(wrapper.find(LinkedEventsMap).length).toEqual(1)
-  expect(wrapper.find(LinkedEventsMap).props()).toEqual({
+  expect(wrapper.find(LinkedEventsMap).length).toEqual(2) // mobile and desktop
+  expect(wrapper.find(LinkedEventsMap).at(1).props()).toEqual({
+    event: props.event
+  })
+  expect(wrapper.find(LinkedEventsMap).at(0).props()).toEqual({
     event: props.event
   })
 

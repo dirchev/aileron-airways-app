@@ -54,33 +54,29 @@ export class LinkedEventsMap extends Component {
   render () {
     return (
       <div>
-        <div className="level">
-          <div className="level-left">
-            <div className="title is-size-4">Linked Events</div>
-          </div>
-          <div className="level-right">
-            {
-              this.state.editMode
-              ? (
-                <button onClick={this.toggleEditMode} className="button is-default is-small">
-                  <span className="icon is-small">
-                    <i className="fa fa-times"></i>
-                  </span>
-                </button>
-              )
-              : (
-                <button onClick={this.toggleEditMode} className="button is-primary is-small">
-                  <span>Edit</span>
-                  <span className="icon is-small">
-                    <i className="fa fa-edit"></i>
-                  </span>
-                </button>
-              )
-            }
-          </div>
-        </div>
         <div className="timeline">
           {this.renderItems()}
+        </div>
+        <div className="mt-md">
+          {
+            this.state.editMode
+            ? (
+              <button onClick={this.toggleEditMode} className="button is-default is-fullwidth">
+                <span>Close Edit Mode</span>
+                <span className="icon is-small">
+                  <i className="fa fa-times"></i>
+                </span>
+              </button>
+            )
+            : (
+              <button onClick={this.toggleEditMode} className="button is-primary is-fullwidth">
+                <span>Edit Linked Events</span>
+                <span className="icon is-small">
+                  <i className="fa fa-edit"></i>
+                </span>
+              </button>
+            )
+          }
         </div>
       </div>
     )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import EditableText from '../../components/inputs/EditableText'
@@ -20,6 +21,15 @@ class TimelineHeading extends Component {
       </div>
     )
   }
+}
+
+TimelineHeading.propTypes = {
+  timeline: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    CreationTimeStamp: PropTypes.string.isRequired,
+  }).isRequired,
+  onTitleChange: PropTypes.func.isRequired
 }
 
 export default TimelineHeading

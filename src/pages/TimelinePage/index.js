@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import moment from 'moment'
 import { connect } from 'react-redux'
@@ -12,7 +13,7 @@ import TimelineHeading from './TimelineHeading'
 import TimelineEvents from './TimelineEvents'
 import TimelineOptionsButton from '../../components/option-buttons/TimelineOptionsButton'
 
-class TimelinePage extends Component {
+export class TimelinePage extends Component {
   constructor () {
     super()
     this.handleTitleChange = this.handleTitleChange.bind(this)
@@ -65,6 +66,24 @@ class TimelinePage extends Component {
       </div>
     )
   }
+}
+
+TimelinePage.propTypes = {
+  timeline: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    events: PropTypes.arrayOf(PropTypes.shape({
+      Id: PropTypes.string.isRequired,
+      Title: PropTypes.string.isRequired,
+      TimelineId: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+      EventDateTime: PropTypes.string.isRequired
+    }))
+  }),
+  changeTimelineTitle: PropTypes.func.isRequired,
+  deleteTimeline: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func.isRequired,
+  createEvent: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {

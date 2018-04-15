@@ -31,8 +31,8 @@ export class TimelineRegister extends Component {
   handleSortChange (path) {
     return (e) => {
       this.setState({
+        page: 1,
         sort: {
-          page: 1,
           path: path,
           order: this.state.sort.path === path ? this.state.sort.order * -1 : 1
         }

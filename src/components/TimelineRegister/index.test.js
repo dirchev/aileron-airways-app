@@ -145,7 +145,9 @@ it('supports sorting', function () {
   expect(wrapper.find('tbody>tr').at(0).text()).toContain('DTitle')
   expect(wrapper.find('tbody>tr').at(0).text()).toContain('DTitle')
   wrapper.find('th').at(2).simulate('click') // no events asc
-  expect(wrapper.find('tbody>tr').at(0).text()).toContain('4')
-  expect(wrapper.find('tbody>tr').at(0).text()).toContain('4')
+  expect(wrapper.find('tbody>tr').at(0).text()).toContain('1')
+  expect(wrapper.find('tbody>tr').at(0).text()).toContain('1')
   wrapper.find('th').at(2).simulate('click') // no events desc
+  expect(wrapper.find('tbody>tr').at(0).text()).toContain('4')
+  expect(wrapper.find('tbody>tr').at(0).text()).toContain('4')
 })

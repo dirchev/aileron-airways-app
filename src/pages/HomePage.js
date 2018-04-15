@@ -3,19 +3,18 @@ import PropTypes from 'prop-types'
 import Navigation from '../components/Navigation'
 import TimelineRegister from '../components/TimelineRegister'
 import TimelinesSearchList from '../components/TimelinesSearchList'
-import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
 import TimelineSearch from '../components/TimelineSearch'
+import HomeOptionsButton from '../components/option-buttons/HomeOptionsButton'
 
 import timelineActions from '../action-creators/timeline'
+import uiActions from '../action-creators/ui'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
 export class HomePage extends Component {
   getNavigationItems () {
     return {
-      actionsRight: [
-        <TimelineCreateButton key="timeline-create"/>
-      ]
+      actionsRight: []
     }
   }
 
@@ -27,7 +26,7 @@ export class HomePage extends Component {
     return (
       <div>
         <Navigation {...this.getNavigationItems()}/>
-        <div className="section">
+        <div className="section mt-lg">
           <div className="mb-md">
             <div className="title">
               <h1>Timelines</h1>
@@ -49,6 +48,9 @@ export class HomePage extends Component {
             )
           }
         </div>
+        <HomeOptionsButton
+          createTimeline={this.props.createTimeline}
+        />
       </div>
     )
   }
@@ -73,6 +75,9 @@ const mapDispatchToProps = function (dispatch) {
   return {
     fetchAll: () => {
       dispatch(timelineActions.fetchAll())
+    },
+    createTimeline: () => {
+      dispatch(uiActions.openModal('createTimeline', {}))
     }
   }
 }

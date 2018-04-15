@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Input extends Component {
   getEventHandlers () {
@@ -10,9 +11,6 @@ class Input extends Component {
     }
     var eventHandlers = {}
     if (this.props.onChange) eventHandlers.onChange = wrap(this.props.onChange)
-    if (this.props.onKeyUp) eventHandlers.onKeyUp = wrap(this.props.onKeyUp)
-    if (this.props.onKeyDown) eventHandlers.onKeyDown = wrap(this.props.onKeyDown)
-    if (this.props.onKeyPress) eventHandlers.onKeyPress = wrap(this.props.onKeyPress)
     return eventHandlers
   }
 
@@ -68,6 +66,19 @@ class Input extends Component {
       return control
     }
   }
+}
+
+Input.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  defaultValue: PropTypes.any,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  iconLeft: PropTypes.string,
+  iconRight: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  type: PropTypes.string,
+  className: PropTypes.string,
 }
 
 Input.defaultProps = {

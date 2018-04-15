@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Navigation from '../components/Navigation'
 import TimelinesList from '../components/TimelinesList'
 import TimelinesSearchList from '../components/TimelinesSearchList'
@@ -9,7 +10,7 @@ import timelineActions from '../action-creators/timeline'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-class HomePage extends Component {
+export class HomePage extends Component {
   getNavigationItems () {
     return {
       actionsRight: [
@@ -51,6 +52,14 @@ class HomePage extends Component {
       </div>
     )
   }
+}
+
+HomePage.propTypes = {
+  timelines: PropTypes.arrayOf(PropTypes.shape({
+    Id: PropTypes.string.isRequired
+  })).isRequired,
+  hasFiltersApplied: PropTypes.bool.isRequired,
+  fetchAll: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {

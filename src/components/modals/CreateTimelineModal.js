@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Input from '../inputs/Input'
 import timelineActions from '../../action-creators/timeline'
 
-class CreateTimelineModal extends Component {
+export class CreateTimelineModal extends Component {
   constructor () {
     super()
     this.state = {
@@ -59,6 +60,11 @@ class CreateTimelineModal extends Component {
       </div>
     )
   }
+}
+
+CreateTimelineModal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  createTimeline: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = (dispatch) => {

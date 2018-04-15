@@ -33,6 +33,7 @@ export default function eventsReducer(state = defaultState, action) {
     case 'ERROR_EDIT_EVENT_DESCRIPTION':
     case 'ERROR_EDIT_EVENT_LOCATION':
     case 'ERROR_CREATE_EVENT':
+    case 'ERROR_DELETE_EVENT':
       return {
         ...state,
         [action.data.Id]: {
@@ -45,21 +46,11 @@ export default function eventsReducer(state = defaultState, action) {
     case 'SUCCESS_FETCH_EVENTS':
       var newEvents = {}
       action.data.events.forEach(function (event) {
-        newEvents[event.Id] = { loading: false, synced: false, ...event }
+        newEvents[event.Id] = { ...event, loading: false, synced: true }
       })
       return {
         ...state,
         ...newEvents
-      }
-
-    case 'ERROR_DELETE_EVENT':
-      return {
-        [action.data.Id]: {
-          ...state[action.data.Id],
-          loading: false,
-          synced: true,
-          error: action.error
-        }
       }
 
     case 'SUCCESS_DELETE_EVENT':

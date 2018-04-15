@@ -5,6 +5,7 @@ export default function timelinesReducer (state = defaultState, action) {
   switch(action.type) {
     case 'START_CREATE_TIMELINE':
     case 'START_EDIT_TIMELINE':
+    case 'START_DELETE_TIMELINE':
       return {
         ...state,
         [action.data.Id]: {
@@ -26,6 +27,7 @@ export default function timelinesReducer (state = defaultState, action) {
       }
     case 'ERROR_EDIT_TIMELINE':
     case 'ERROR_CREATE_TIMELINE':
+    case 'ERROR_DELETE_TIMELINE':
       return {
         ...state,
         [action.data.Id]: {
@@ -35,26 +37,6 @@ export default function timelinesReducer (state = defaultState, action) {
           error: action.error
         }
       }
-
-    case 'START_DELETE_TIMELINE':
-      return {
-        [action.data.Id]: {
-          ...state[action.data.Id],
-          loading: true,
-          synced: false
-        }
-      }
-
-    case 'ERROR_DELETE_TIMELINE':
-      return {
-        [action.data.Id]: {
-          ...state[action.data.Id],
-          loading: false,
-          synced: true,
-          error: action.error
-        }
-      }
-
     case 'SUCCESS_DELETE_TIMELINE':
       return _.omit(state, action.data.Id)
 

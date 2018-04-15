@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import attachmentActions from '../../action-creators/attachment.js'
 
 import AttachmentItem from './AttachmentItem'
 
-class EventAttachments extends Component {
+export class EventAttachments extends Component {
   componentDidMount () {
     this.props.getAttachments()
   }
@@ -31,6 +32,15 @@ class EventAttachments extends Component {
       </div>
     )
   }
+}
+
+EventAttachments.propTypes = {
+  event: PropTypes.shape({
+    Id: PropTypes.string.isRequired
+  }).isRequired,
+  attachments: PropTypes.array.isRequired,
+  deleteAttachment: PropTypes.func.isRequired,
+  getAttachments: PropTypes.func.isRequired
 }
 
 var mapStateToProps = function (state, oldProps) {

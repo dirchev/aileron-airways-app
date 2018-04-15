@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Input from './Input'
 
 class EditableText extends Component {
@@ -6,7 +7,7 @@ class EditableText extends Component {
     super(props)
     this.state = {
       editMode: false,
-      value: this.props.value
+      value: this.props.defaultValue
     }
 
     this.enableEditMode = this.enableEditMode.bind(this)
@@ -50,14 +51,14 @@ class EditableText extends Component {
     return (
       <span onClick={this.enableEditMode} className="editable-text">
         {this.props.children}
-        <span className="tooltip"></span>
       </span>
     )
   }
 }
 
-EditableText.defaultProps = {
-  value: ''
+EditableText.propTypes = {
+  defaultValue: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 }
 
 export default EditableText

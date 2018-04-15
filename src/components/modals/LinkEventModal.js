@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import eventActions from '../../action-creators/event'
 import moment from 'moment'
@@ -14,7 +15,7 @@ const FUSE_OPTIONS = {
   ]
 }
 
-class LinkEventModal extends Component {
+export class LinkEventModal extends Component {
   constructor(props) {
     super(props)
 
@@ -97,6 +98,16 @@ class LinkEventModal extends Component {
   }
 }
 
+LinkEventModal.propTypes = {
+  events: PropTypes.arrayOf(PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+  })).isRequired,
+  linkEvent: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state, ownProps) => {
   var eventId = ownProps.EventId
   var timelineId = ownProps.TimelineId
@@ -133,7 +144,6 @@ const mapStateToProps = (state, ownProps) => {
     .reverse()
     .value()
   return {
-    event: state.events[eventId],
     events: events
   }
 }

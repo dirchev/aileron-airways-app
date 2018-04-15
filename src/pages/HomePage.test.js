@@ -5,7 +5,7 @@ import moment from 'moment'
 import { HomePage } from './HomePage'
 
 import Navigation from '../components/Navigation'
-import TimelinesList from '../components/TimelinesList'
+import TimelineRegister from '../components/TimelineRegister'
 import TimelinesSearchList from '../components/TimelinesSearchList'
 import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
 import TimelineSearch from '../components/TimelineSearch'
@@ -37,7 +37,7 @@ it('shows timelines list on no filters', function () {
   }
 
   const wrapper = shallow(<HomePage {...props} />)
-  expect(wrapper.find(TimelinesList).length).toEqual(1)
+  expect(wrapper.find(TimelineRegister).length).toEqual(1)
   expect(wrapper.find(TimelinesSearchList).length).toEqual(0)
 })
 
@@ -53,7 +53,7 @@ it('shows timelines list on filters', function () {
   }
 
   const wrapper = shallow(<HomePage {...props} />)
-  expect(wrapper.find(TimelinesList).length).toEqual(0)
+  expect(wrapper.find(TimelineRegister).length).toEqual(0)
   expect(wrapper.find(TimelinesSearchList).length).toEqual(1)
 })
 

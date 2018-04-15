@@ -123,7 +123,13 @@ export class TimelineRegister extends Component {
 }
 
 TimelineRegister.propTypes = {
-  timelines: PropTypes.array.isRequired
+  timelines: PropTypes.arrayOf(PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    CreationTimeStamp: PropTypes.string.isRequired,
+    LastEventDate: PropTypes.string.isRequired,
+    NoEvents: PropTypes.number.isRequired,
+  })).isRequired
 }
 
 const mapStateToProps = (state) => {

@@ -32,13 +32,14 @@ class TimelineItem extends Component {
               </div>
               {
                 timeline.events
-                  .filter((e, index) => this.getMatches('events.Title', index).length || this.getMatches('events.Description', index).length)
+                  .map((e, index) => { return {...e, matches: this.getMatches('events.Title', index)}})
+                  .filter((e) => e.matches.length)
                   .map((event, index) => {
                     return (
                       <div key={event.Id} className="media">
                         <div className="media-content">
                           <Link to={`/event/${event.Id}`}>
-                            <HighlightedText matches={this.getMatches('events.Title', index)}>
+                            <HighlightedText matches={event.matches}>
                               {event.Title}
                             </HighlightedText>
                           </Link>

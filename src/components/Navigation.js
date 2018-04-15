@@ -7,42 +7,17 @@ class Navigation extends Component {
     this.state = {
       opened: false
     }
-    this.toggleOpened = this.toggleOpened.bind(this)
-  }
-
-  toggleOpened () {
-    this.setState({
-      opened: !this.state.opened
-    })
   }
 
   render () {
     return (
-      <div className="navbar is-primary">
+      <div className="navbar is-primary is-fixed-top">
         <div className="navbar-brand">
-          <div
-            className={'navbar-burger' + (this.state.opened ? ' is-active' : '')}
-            onClick={this.toggleOpened}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-        <div className={'navbar-menu' + (this.state.opened ? ' is-active' : '')}>
-          <div className="navbar-start">
-            {
-              this.props.actionsLeft.map(function (element) {
-                return element
-              })
-            }
-          </div>
-          <div className="navbar-end">
-            {
-              this.props.actionsRight.map(function (element) {
-                return element
-              })
-            }
-          </div>
+          {
+            this.props.actions.map(function (element) {
+              return element
+            })
+          }
         </div>
       </div>
     )
@@ -50,13 +25,11 @@ class Navigation extends Component {
 }
 
 Navigation.defaultProps = {
-  actionsLeft: [],
-  actionsRight: []
+  actions: [],
 }
 
 Navigation.propTypes = {
-  actionsLeft: PropTypes.arrayOf(PropTypes.element),
-  actionsRight: PropTypes.arrayOf(PropTypes.element)
+  actions: PropTypes.arrayOf(PropTypes.element),
 }
 
 export default Navigation

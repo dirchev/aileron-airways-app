@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import swal from 'sweetalert2'
 
 class TimelineOptionsButton extends Component {
@@ -10,11 +11,17 @@ class TimelineOptionsButton extends Component {
 
     this.toggleOpened = this.toggleOpened.bind(this)
     this.deleteTimeline = this.deleteTimeline.bind(this)
+    this.createEvent = this.createEvent.bind(this)
   }
 
   toggleOpened (e) {
     e.preventDefault()
     this.setState({opened: !this.state.opened})
+  }
+
+  createEvent (e) {
+    e.preventDefault()
+    this.props.createEvent()
   }
 
   deleteTimeline (e) {
@@ -52,10 +59,16 @@ class TimelineOptionsButton extends Component {
   renderItems () {
     return (
       <div className="items">
+        <button className="button" onClick={this.createEvent}>Create Event</button>
         <button className="button" onClick={this.deleteTimeline}>Delete</button>
       </div>
     )
   }
+}
+
+TimelineOptionsButton.propTypes = {
+  createEvent: PropTypes.func.isRequired,
+  deleteTimeline: PropTypes.func.isRequired
 }
 
 export default TimelineOptionsButton

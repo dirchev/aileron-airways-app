@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import swal from 'sweetalert2'
 
 class AttachmentItem extends Component {
@@ -53,6 +54,15 @@ class AttachmentItem extends Component {
       </div>
     )
   }
+}
+
+AttachmentItem.propTypes = {
+  attachment: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    getURL: PropTypes.string
+  }).isRequired,
+  deleteAttachment: PropTypes.func.isRequired
 }
 
 export default AttachmentItem

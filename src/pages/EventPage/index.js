@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import eventActions from '../../action-creators/event'
@@ -9,7 +10,7 @@ import Navigation from '../../components/Navigation'
 import EventBox from './EventBox'
 import LinkedEventsMap from './LinkedEventsMap'
 
-class EventPage extends Component {
+export class EventPage extends Component {
   constructor(props) {
     super(props)
     if (props.event) {
@@ -86,6 +87,22 @@ class EventPage extends Component {
       </div>
     )
   }
+}
+
+EventPage.propTypes = {
+  event: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    TimelineId: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Location: PropTypes.string.isRequired,
+    EventDateTime: PropTypes.string.isRequired,
+  }),
+  changeEventTitle: PropTypes.func.isRequired,
+  changeEventDescription: PropTypes.func.isRequired,
+  changeEventLocation: PropTypes.func.isRequired,
+  /* changeEventDateTime: PropTypes.func.isRequired,*/
+  deleteEvent: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {

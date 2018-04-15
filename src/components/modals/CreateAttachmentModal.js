@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import attachmentActions from '../../action-creators/attachment'
 
 import Input from '../inputs/Input'
 
-class CreateAttachmentModal extends Component {
+export class CreateAttachmentModal extends Component {
   constructor(props) {
     super(props)
 
@@ -84,6 +85,11 @@ class CreateAttachmentModal extends Component {
       </div>
     )
   }
+}
+
+CreateAttachmentModal.propTypes = {
+  createAttachment: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
 }
 
 var mapDispatchToProps = function (dispatch, oldProps) {

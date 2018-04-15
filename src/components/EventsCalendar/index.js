@@ -111,7 +111,11 @@ class EventsCalendar extends Component {
 }
 
 EventsCalendar.propTypes = {
-  events: PropTypes.array
+  events: PropTypes.arrayOf(PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    EventDateTime: PropTypes.string.isRequired
+  })).isRequired
 }
 
 export default EventsCalendar

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Fuse from 'fuse.js'
 
@@ -110,6 +111,20 @@ class TimelineEvents extends Component {
       <div>View can not be found</div>
     )
   }
+}
+
+TimelineEvents.propTypes = {
+  timeline: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    events: PropTypes.arrayOf(PropTypes.shape({
+      Id: PropTypes.string.isRequired,
+      Title: PropTypes.string.isRequired,
+      TimelineId: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+      EventDateTime: PropTypes.string.isRequired
+    }))
+  }).isRequired
 }
 
 export default TimelineEvents

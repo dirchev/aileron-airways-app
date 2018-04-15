@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import CreateTimelineModal from './CreateTimelineModal'
@@ -15,7 +16,7 @@ const modalsMap = {
   'createAttachment': CreateAttachmentModal
 }
 
-class ModalsParent extends Component {
+export class ModalsParent extends Component {
   getOpenedModal () {
     if (!this.props.modalOpened) return null
     var Component = modalsMap[this.props.modalOpened]
@@ -30,6 +31,12 @@ class ModalsParent extends Component {
       </div>
     )
   }
+}
+
+ModalsParent.propTypes = {
+  modalOpened: PropTypes.string,
+  modalProps: PropTypes.object,
+  onModalClose: PropTypes.func
 }
 
 const mapStateToProps = (state, ownProps) => {

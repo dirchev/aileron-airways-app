@@ -27,9 +27,9 @@ class TimelineListItem extends Component {
 }
 
 TimelineListItem.propTypes = {
-  Id: PropTypes.string,
-  Title: PropTypes.string,
-  CreationTimeStamp: PropTypes.string,
+  Id: PropTypes.string.isRequired,
+  Title: PropTypes.string.isRequired,
+  CreationTimeStamp: PropTypes.string.isRequired,
   synced: PropTypes.bool,
   loading: PropTypes.bool,
   error: PropTypes.object

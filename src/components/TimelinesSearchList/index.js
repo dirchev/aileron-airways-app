@@ -16,7 +16,7 @@ const FUSE_OPTIONS = {
   ]
 }
 
-class TimelinesSearchList extends Component {
+export class TimelinesSearchList extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -32,6 +32,13 @@ class TimelinesSearchList extends Component {
 
   render() {
     var skip = this.state.page * 10 - 10
+    if (!this.props.timelinesFilter) {
+      return (
+        <div className="notification">
+          Please specify a search term.
+        </div>
+      )
+    }
     return (
       <div>
         <div className="notification">

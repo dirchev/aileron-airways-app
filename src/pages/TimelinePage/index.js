@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import timelineActions from '../../action-creators/timeline'
 import eventActions from '../../action-creators/event'
+import uiActions from '../../action-creators/ui'
 
 import { Link, Redirect } from 'react-router-dom'
 import Navigation from '../../components/Navigation'
-import CreateEventButton from '../../components/nav-items/CreateEventButton'
 import TimelineHeading from './TimelineHeading'
 import TimelineEvents from './TimelineEvents'
 import TimelineOptionsButton from '../../components/option-buttons/TimelineOptionsButton'
 
-class TimelinePage extends Component {
+export class TimelinePage extends Component {
   constructor () {
     super()
     this.handleTitleChange = this.handleTitleChange.bind(this)
@@ -27,10 +28,7 @@ class TimelinePage extends Component {
     )
 
     return {
-      actionsLeft: [backButton],
-      actionsRight: [
-        <CreateEventButton timeline={this.props.timeline} key="create-event"/>
-      ]
+      actionsLeft: [backButton]
     }
   }
 
@@ -61,10 +59,31 @@ class TimelinePage extends Component {
           </div>
           <TimelineEvents timeline={this.props.timeline} />
         </div>
-        <TimelineOptionsButton deleteTimeline={this.props.deleteTimeline}/>
+        <TimelineOptionsButton
+          deleteTimeline={this.props.deleteTimeline}
+          createEvent={this.props.createEvent}
+        />
       </div>
     )
   }
+}
+
+TimelinePage.propTypes = {
+  timeline: PropTypes.shape({
+    Id: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    events: PropTypes.arrayOf(PropTypes.shape({
+      Id: PropTypes.string.isRequired,
+      Title: PropTypes.string.isRequired,
+      TimelineId: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+      EventDateTime: PropTypes.string.isRequired
+    }))
+  }),
+  changeTimelineTitle: PropTypes.func.isRequired,
+  deleteTimeline: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func.isRequired,
+  createEvent: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -99,6 +118,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchEvents: () => {
       dispatch(eventActions.fetchForTimeline(ownProps.match.params.Id))
     },
+    createEvent: () => {
+      dispatch(uiActions.openModal('createEvent', {timelineId: ownProps.match.params.Id}))
+    }
   }
 }
 

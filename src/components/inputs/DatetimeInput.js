@@ -29,7 +29,7 @@ class DatetimeInput extends Component {
           <Datetime
             open={true}
             value={moment(this.props.value)}
-            renderInput={this.renderInput}
+            renderInput={() => null}
             onChange={this.handleOnChange}
             autoFocus={this.props.autoFocus}
             inputProps={{className: 'input', ..._.omit(this.props, ['onChange', 'value', 'defaultValue'])}}

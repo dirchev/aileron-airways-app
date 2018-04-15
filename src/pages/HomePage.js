@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Navigation from '../components/Navigation'
-import TimelinesList from '../components/TimelinesList'
+import TimelineRegister from '../components/TimelineRegister'
 import TimelinesSearchList from '../components/TimelinesSearchList'
 import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
 import TimelineSearch from '../components/TimelineSearch'
@@ -45,7 +45,7 @@ export class HomePage extends Component {
               <TimelinesSearchList />
             )
             : (
-              <TimelinesList />
+              <TimelineRegister />
             )
           }
         </div>

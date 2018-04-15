@@ -67,7 +67,14 @@ export default function eventLinksReducer(state = defaultState, action) {
       })
 
     case 'SUCCESS_GET_LINKED_EVENTS':
-    return _.uniqBy([...state, ...action.data], 'Id')
+    var toAdd = action.data.map((l) => {
+      return {
+        ...l,
+        loading: false,
+        synced: true
+      }
+    })
+    return _.uniqBy([...state, ...toAdd], 'Id')
 
     default:
       return state

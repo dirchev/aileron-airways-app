@@ -13,7 +13,7 @@ it('renders without crashing', function () {
   const props = {
     event: {
       Id: '1',
-      TimelineEventId: '1t',
+      TimelineId: '1t',
       Title: 'Something',
       Description: 'Description',
       EventDateTime: moment().toISOString(),
@@ -31,7 +31,7 @@ it('renders editable fields', function () {
   const props = {
     event: {
       Id: '1',
-      TimelineEventId: '1t',
+      TimelineId: '1t',
       Title: 'Something',
       Description: 'Description',
       EventDateTime: moment().toISOString(),

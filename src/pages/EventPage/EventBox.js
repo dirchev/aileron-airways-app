@@ -62,7 +62,7 @@ class EventBox extends Component {
 EventBox.propTypes = {
   event: PropTypes.shape({
     Id: PropTypes.string.isRequired,
-    TimelineEventId: PropTypes.string.isRequired,
+    TimelineId: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     EventDateTime: PropTypes.string.isRequired,
@@ -70,7 +70,7 @@ EventBox.propTypes = {
   }).isRequired,
   handleTitleChange: PropTypes.func.isRequired,
   handleDescriptionChange: PropTypes.func.isRequired,
-  handleEventDateTimeChange: PropTypes.func.isRequired,
+  /* handleEventDateTimeChange: PropTypes.func.isRequired,*/
   handleLocationChange: PropTypes.func.isRequired,
 }
 

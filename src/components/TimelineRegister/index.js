@@ -77,7 +77,7 @@ export class TimelineRegister extends Component {
                   ) : null
                 }
               </th>
-              <th onClick={this.handleSortChange('NoEvents')}>
+              <th className="is-hidden-mobile" onClick={this.handleSortChange('NoEvents')}>
                 # of Events
                 {
                   this.state.sort.path === 'NoEvents'
@@ -86,7 +86,7 @@ export class TimelineRegister extends Component {
                   ) : null
                 }
               </th>
-              <th onClick={this.handleSortChange('LastEventDate')}>
+              <th className="is-hidden-mobile" onClick={this.handleSortChange('LastEventDate')}>
                 Last Event Date
                 {
                   this.state.sort.path === 'LastEventDate'
@@ -113,8 +113,8 @@ export class TimelineRegister extends Component {
         <tr key={timeline.Id}>
           <td>{timeline.Title}</td>
           <td>{moment(timeline.CreationTimeStamp).format('DD MMM YYYY HH:mm')}</td>
-          <td>{timeline.NoEvents}</td>
-          <td>{timeline.LastEventDate && moment(timeline.LastEventDate).format('DD MMM YYYY HH:mm')}</td>
+          <td className="is-hidden-mobile">{timeline.NoEvents}</td>
+          <td className="is-hidden-mobile">{timeline.LastEventDate && moment(timeline.LastEventDate).format('DD MMM YYYY HH:mm')}</td>
           <td><Link to={`/timeline/${timeline.Id}`} className="button is-small is-success">Open</Link></td>
         </tr>
       )
@@ -127,7 +127,7 @@ TimelineRegister.propTypes = {
     Id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     CreationTimeStamp: PropTypes.string.isRequired,
-    LastEventDate: PropTypes.string.isRequired,
+    LastEventDate: PropTypes.string,
     NoEvents: PropTypes.number.isRequired,
   })).isRequired
 }

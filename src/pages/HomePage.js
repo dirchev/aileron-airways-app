@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Navigation from '../components/Navigation'
-import TimelinesList from '../components/TimelinesList'
+import TimelineRegister from '../components/TimelineRegister'
 import TimelinesSearchList from '../components/TimelinesSearchList'
 import TimelineCreateButton from '../components/nav-items/CreateTimelineButton'
 import TimelineSearch from '../components/TimelineSearch'
@@ -44,7 +44,7 @@ class HomePage extends Component {
               <TimelinesSearchList />
             )
             : (
-              <TimelinesList />
+              <TimelineRegister />
             )
           }
         </div>

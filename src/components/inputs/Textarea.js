@@ -26,7 +26,7 @@ class Textarea extends Component {
         }
         <div className={controlClassNames}>
           <textarea
-            className="textarea"
+            className={`textarea ${this.props.error ? 'is-danger' : ''}`}
             type={this.props.type}
             placeholder={this.props.placeholder}
             value={this.props.value}
@@ -36,7 +36,12 @@ class Textarea extends Component {
             autoFocus={this.props.autoFocus}
           />
         </div>
-        {/* <p className="help is-success">This username is available</p> */}
+        {
+          this.props.error
+          ? (
+            <p class="help is-danger">{this.props.error}</p>
+          ) : null
+        }
       </div>
     )
   }

@@ -20,12 +20,12 @@ it('sets fields properly', function () {
     createTimeline: jest.fn()
   }
   const wrapper = shallow(<CreateTimelineModal {...props} />)
-  expect(wrapper.state()).toEqual({
+  expect(wrapper.state()).toMatchObject({
     title: '',
   })
   var date = moment().toISOString()
   wrapper.find(Input).simulate('change', 'Title')
-  expect(wrapper.state()).toEqual({
+  expect(wrapper.state()).toMatchObject({
     title: 'Title',
   })
 })

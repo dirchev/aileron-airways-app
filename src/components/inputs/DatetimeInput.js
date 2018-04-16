@@ -35,6 +35,12 @@ class DatetimeInput extends Component {
             inputProps={{className: 'input', ..._.omit(this.props, ['onChange', 'value', 'defaultValue'])}}
           />
         </div>
+        {
+          this.props.error
+          ? (
+            <p className="help is-danger">{this.props.error}</p>
+          ) : null
+        }
       </div>
     )
   }

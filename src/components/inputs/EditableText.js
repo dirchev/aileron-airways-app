@@ -7,7 +7,8 @@ class EditableText extends Component {
     super(props)
     this.state = {
       editMode: false,
-      value: this.props.defaultValue
+      value: this.props.defaultValue,
+      error: null
     }
 
     this.enableEditMode = this.enableEditMode.bind(this)
@@ -17,17 +18,22 @@ class EditableText extends Component {
   }
 
   handleChange (value) {
-    this.setState({value})
+    this.setState({
+      value: value,
+      error: this.props.validator(value)
+    })
   }
 
   handleSubmit (e) {
     e.preventDefault()
+    if (this.props.error || this.props.validator(this.state.value))
+      return this.setState({error: this.props.validator(this.state.value)})
     this.props.onChange(this.state.value)
     this.setState({editMode: false})
   }
 
   enableEditMode () {
-    this.setState({editMode: !this.state.editMode, value:this.props.defaultValue})
+    this.setState({editMode: !this.state.editMode, value: this.props.defaultValue, error: null})
   }
 
   resetField () {
@@ -39,7 +45,7 @@ class EditableText extends Component {
       return (
         <form onSubmit={this.handleSubmit}>
           <div className="field is-grouped is-grouped-multiline">
-            <Input doNotSetField={true} value={this.state.value} onChange={this.handleChange} autoFocus/>
+            <Input doNotSetField={true} value={this.state.value} onChange={this.handleChange} autoFocus error={this.state.error}/>
             <div className="control">
               <button type="submit" className="button is-link mr-sm"><i className="fa fa-send"></i></button>
               <button type="button" onClick={this.resetField} className="button is-link is-danger"><i className="fa fa-times"></i></button>
@@ -59,6 +65,7 @@ class EditableText extends Component {
 EditableText.propTypes = {
   defaultValue: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  validator: PropTypes.func.isRequired,
 }
 
 export default EditableText

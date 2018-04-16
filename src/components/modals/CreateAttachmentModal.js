@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import attachmentActions from '../../action-creators/attachment'
+import titleValidator from '../../validators/title'
+import fileValidator from '../../validators/file'
 
 import Input from '../inputs/Input'
 
@@ -12,7 +15,11 @@ export class CreateAttachmentModal extends Component {
     this.state = {
       title: '',
       file: '',
-      fileName: ''
+      fileName: '',
+      errors: {
+        title: null,
+        file: null
+      }
     }
 
     this.onTitleChange = this.onTitleChange.bind(this)
@@ -21,18 +28,46 @@ export class CreateAttachmentModal extends Component {
   }
 
   onTitleChange(value) {
-    this.setState({ title: value })
+    var newState = {
+      title: value
+    }
+    this.setState({
+      ...newState,
+      errors: {
+        ...this.state.errors,
+        title: this.getErrors(newState).title
+      }
+    })
   }
 
   onFileChange (e) {
-    this.setState({
+    var newState = {
       file: e.target.files[0],
       fileName: e.target.value.split(/(\\|\/)/g).pop()
+    }
+    this.setState({
+      ...newState,
+      errors: {
+        ...this.state.errors,
+        file: this.getErrors(newState).file
+      }
     })
+  }
+
+  getErrors (state) {
+    if (!state) state = this.state
+    var errors = {
+      title: titleValidator(state.title),
+      file: fileValidator(state.file)
+    }
+    return errors
   }
 
   onSubmit(e) {
     e.preventDefault()
+    if (_.some(_.values(this.getErrors()), (e) => e)) {
+      return this.setState({errors: this.getErrors()})
+    }
     this.props.createAttachment({
       Title: this.state.title,
       file: this.state.file
@@ -48,11 +83,15 @@ export class CreateAttachmentModal extends Component {
           <div className="box">
             <h5 className="is-size-5 mb-md">New Attachment</h5>
             <form onSubmit={this.onSubmit}>
+              <Input
+                label='Attachment Title'
+                onChange={this.onTitleChange}
+                value={this.state.title}
+                placeholder='Enter attachment title...'
+                error={this.state.errors.title}
+              />
               <div className="field">
-                <Input onChange={this.onTitleChange} value={this.state.title} placeholder='Enter attachment title...'/>
-              </div>
-              <div className="field">
-                <div className={`file is-fullwidth ${this.state.fileName ? 'has-name' : ''}`}>
+                <div className={`file is-fullwidth ${this.state.fileName ? 'has-name' : ''} ${this.state.errors.file ? 'is-danger' : ''}`}>
                   <label className="file-label">
                     <input className="file-input" type="file" onChange={this.onFileChange} value={this.state.value} />
                     <span className="file-cta">
@@ -70,6 +109,12 @@ export class CreateAttachmentModal extends Component {
                     }
                   </label>
                 </div>
+                {
+                  this.state.errors.file
+                  ? (
+                    <p className="help is-danger">{this.state.errors.file}</p>
+                  ) : null
+                }
               </div>
               <div className="field is-grouped">
                 <div className="control">

@@ -7,14 +7,16 @@ import Textarea from './Textarea'
 
 it('renders without crashing', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableTextArea {...props}>Text</EditableTextArea>)
 })
 
 it('renders children', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableTextArea {...props}>Text</EditableTextArea>)
   expect(wrapper.text()).toContain('Text')
@@ -22,7 +24,8 @@ it('renders children', function () {
 
 it('triggers edit mode on click and shows Texarea', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableTextArea {...props}>Text</EditableTextArea>)
   expect(wrapper.find(Textarea).length).toEqual(0)
@@ -34,7 +37,8 @@ it('triggers edit mode on click and shows Texarea', function () {
 
 it('does trigger onChange on form submit', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableTextArea {...props}>Text</EditableTextArea>)
   expect(wrapper.find(Textarea).length).toEqual(0)
@@ -55,7 +59,8 @@ it('does trigger onChange on form submit', function () {
 it('sets value to the textarea', function () {
   const props = {
     onChange: jest.fn(),
-    defaultValue: 'Some value'
+    defaultValue: 'Some value',
+    validator: () => {}
   }
   const wrapper = shallow(<EditableTextArea {...props}>Text</EditableTextArea>)
   expect(wrapper.find(Textarea).length).toEqual(0)
@@ -69,7 +74,8 @@ it('sets value to the textarea', function () {
 it('does reset on cancel button click', function () {
   const props = {
     onChange: jest.fn(),
-    defaultValue: 'Some value'
+    defaultValue: 'Some value',
+    validator: () => {}
   }
   const wrapper = shallow(<EditableTextArea {...props}>Text</EditableTextArea>)
   expect(wrapper.find(Textarea).length).toEqual(0)

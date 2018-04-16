@@ -22,7 +22,7 @@ class Input extends Component {
     var control = (
       <div className={controlClassNames}>
         <input
-          className="input"
+          className={`input ${this.props.error ? 'is-danger' : ''}`}
           type={this.props.type}
           placeholder={this.props.placeholder}
           value={this.props.value}
@@ -60,6 +60,12 @@ class Input extends Component {
             : null
           }
           {control}
+          {
+            this.props.error
+            ? (
+              <p className="help is-danger">{this.props.error}</p>
+            ) : null
+          }
         </div>
       )
     } else {

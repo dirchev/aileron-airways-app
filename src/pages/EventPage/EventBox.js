@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import titleValidator from '../../validators/title'
+import descriptionValidator from '../../validators/description'
 
 import EditableText from '../../components/inputs/EditableText'
 import EditableTextArea from  '../../components/inputs/EditableTextArea'
@@ -21,7 +23,7 @@ class EventBox extends Component {
       <div className="card">
         <div className="card-content">
           <div className="title">
-            <EditableText defaultValue={this.props.event.Title} onChange={this.props.handleTitleChange}>
+            <EditableText defaultValue={this.props.event.Title} onChange={this.props.handleTitleChange} validator={titleValidator}>
               {this.props.event.Title}
             </EditableText>
           </div>
@@ -38,6 +40,7 @@ class EventBox extends Component {
           }
           <span>
             <EditableTextArea
+              validator={descriptionValidator}
               defaultValue={this.props.event.Description}
               onChange={this.props.handleDescriptionChange}
             >

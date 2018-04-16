@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Textarea from './Textarea'
 
 class EditableTextArea extends Component {
@@ -6,7 +7,8 @@ class EditableTextArea extends Component {
     super(props)
     this.state = {
       editMode: false,
-      value: this.props.value
+      value: this.props.defaultValue,
+      error: null
     }
 
     this.enableEditMode = this.enableEditMode.bind(this)
@@ -15,18 +17,23 @@ class EditableTextArea extends Component {
     this.resetField = this.resetField.bind(this)
   }
 
-  handleChange(value) {
-    this.setState({ value })
+  handleChange (value) {
+    this.setState({
+      value: value,
+      error: this.props.validator(value)
+    })
   }
 
-  handleSubmit(e) {
+  handleSubmit (e) {
     e.preventDefault()
+    if (this.props.error || this.props.validator(this.state.value))
+      return this.setState({error: this.props.validator(this.state.value)})
     this.props.onChange(this.state.value)
-    this.setState({ editMode: false })
+    this.setState({editMode: false})
   }
 
-  enableEditMode() {
-    this.setState({ editMode: !this.state.editMode, value: this.props.defaultValue })
+  enableEditMode () {
+    this.setState({editMode: !this.state.editMode, value: this.props.defaultValue, error: null})
   }
 
   resetField() {
@@ -38,7 +45,7 @@ class EditableTextArea extends Component {
       return (
         <form onSubmit={this.handleSubmit}>
           <div className="control">
-            <Textarea doNotSetField={true} value={this.state.value} onChange={this.handleChange} autoFocus />
+            <Textarea doNotSetField={true} value={this.state.value} onChange={this.handleChange} autoFocus error={this.state.error}/>
             <div className="control">
               <button type="submit" className="button is-link mr-sm"><i className="fa fa-send"></i></button>
               <button type="button" onClick={this.resetField} className="button is-link is-danger"><i className="fa fa-times"></i></button>
@@ -57,8 +64,10 @@ class EditableTextArea extends Component {
 
 }
 
-EditableTextArea.defaultProps = {
-  value: ''
+EditableTextArea.propTypes = {
+  defaultValue: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  validator: PropTypes.func.isRequired,
 }
 
 export default EditableTextArea

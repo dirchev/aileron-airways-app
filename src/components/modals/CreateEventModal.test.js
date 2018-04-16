@@ -23,7 +23,7 @@ it('sets fields properly', function () {
     createEvent: jest.fn()
   }
   const wrapper = shallow(<CreateEventModal {...props} />)
-  expect(wrapper.state()).toEqual({
+  expect(wrapper.state()).toMatchObject({
     title: '',
     description: '',
     eventDateTime: '',
@@ -34,7 +34,7 @@ it('sets fields properly', function () {
   wrapper.find(Textarea).simulate('change', 'Description')
   wrapper.find(DatetimeInput).simulate('change', date)
   wrapper.find(LocationInput).simulate('change', 'new location')
-  expect(wrapper.state()).toEqual({
+  expect(wrapper.state()).toMatchObject({
     title: 'Title',
     description: 'Description',
     eventDateTime: date,

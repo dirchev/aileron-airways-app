@@ -7,14 +7,16 @@ import Input from './Input'
 
 it('renders without crashing', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableText {...props}>Text</EditableText>)
 })
 
 it('renders children', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableText {...props}>Text</EditableText>)
   expect(wrapper.text()).toContain('Text')
@@ -22,7 +24,8 @@ it('renders children', function () {
 
 it('triggers edit mode on click and shows input', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableText {...props}>Text</EditableText>)
   expect(wrapper.find(Input).length).toEqual(0)
@@ -34,7 +37,8 @@ it('triggers edit mode on click and shows input', function () {
 
 it('does trigger onChange on form submit', function () {
   const props = {
-    onChange: jest.fn()
+    onChange: jest.fn(),
+    validator: () => {}
   }
   const wrapper = shallow(<EditableText {...props}>Text</EditableText>)
   expect(wrapper.find(Input).length).toEqual(0)
@@ -55,7 +59,8 @@ it('does trigger onChange on form submit', function () {
 it('sets value to the input', function () {
   const props = {
     onChange: jest.fn(),
-    defaultValue: 'Some value'
+    defaultValue: 'Some value',
+    validator: () => {}
   }
   const wrapper = shallow(<EditableText {...props}>Text</EditableText>)
   expect(wrapper.find(Input).length).toEqual(0)
@@ -70,7 +75,8 @@ it('sets value to the input', function () {
 it('does reset on cancel button click', function () {
   const props = {
     onChange: jest.fn(),
-    defaultValue: 'Some value'
+    defaultValue: 'Some value',
+    validator: () => {}
   }
   const wrapper = shallow(<EditableText {...props}>Text</EditableText>)
   expect(wrapper.find(Input).length).toEqual(0)

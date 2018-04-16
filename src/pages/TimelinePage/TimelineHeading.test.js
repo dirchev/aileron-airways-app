@@ -28,7 +28,7 @@ it('renders editable text for the timeline title', function () {
   }
   const wrapper = shallow(<TimelineHeading {...props} />)
   expect(wrapper.find(EditableText).length).toEqual(1)
-  expect(wrapper.find(EditableText).props()).toEqual({
+  expect(wrapper.find(EditableText).props()).toMatchObject({
     children: 'Title',
     defaultValue: 'Title',
     onChange: props.onTitleChange

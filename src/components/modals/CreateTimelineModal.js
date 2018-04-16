@@ -1,26 +1,48 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Input from '../inputs/Input'
 import timelineActions from '../../action-creators/timeline'
+import titleValidator from '../../validators/title'
 
 export class CreateTimelineModal extends Component {
   constructor () {
     super()
     this.state = {
-      title: ''
+      title: '',
+      errors: {
+        title: null
+      }
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   onChange (value) {
-    this.setState({title: value})
+    var newState = {
+      title: value
+    }
+    this.setState({
+      ...newState,
+      errors: this.getErrors(newState)
+    })
+  }
+
+  getErrors (state) {
+    if (!state) state = this.state
+    var errors = {
+      title: titleValidator(state.title)
+    }
+    return errors
   }
 
   onSubmit (e) {
     e.preventDefault()
+    if (_.some(_.values(this.getErrors()), (e) => e)) {
+      return this.setState({errors: this.getErrors()})
+    }
     this.props.createTimeline({Title: this.state.title})
     this.props.onClose()
   }
@@ -44,6 +66,7 @@ export class CreateTimelineModal extends Component {
                   value={this.state.title}
                   label="Title"
                   placeholder="Please enter timeline title..."
+                  error={this.state.errors.title}
                 />
                 <div className="field is-grouped">
                   <div className="control">

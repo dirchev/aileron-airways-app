@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import titleValidator from '../../validators/title'
 
 import EditableText from '../../components/inputs/EditableText'
 
@@ -10,7 +11,7 @@ class TimelineHeading extends Component {
       <div>
         <div className="title">
           <h1>
-            <EditableText defaultValue={this.props.timeline.Title} onChange={this.props.onTitleChange}>
+            <EditableText defaultValue={this.props.timeline.Title} onChange={this.props.onTitleChange} validator={titleValidator}>
               {this.props.timeline.Title}
             </EditableText>
           </h1>

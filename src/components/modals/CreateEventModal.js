@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import eventActions from '../../action-creators/event'
@@ -8,6 +9,10 @@ import DatetimeInput from '../inputs/DatetimeInput'
 import Textarea from '../inputs/Textarea'
 import LocationInput from '../inputs/LocationInput'
 
+import titleValidator from '../../validators/title'
+import descriptionValidator from '../../validators/description'
+import eventDateTimeValidator from '../../validators/eventDateTime'
+
 export class CreateEventModal extends Component {
   constructor() {
     super()
@@ -15,21 +20,48 @@ export class CreateEventModal extends Component {
       title: '',
       description: '',
       eventDateTime: '',
-      location: ''
+      location: '',
+      errors: {
+        title: null,
+        description: null,
+        eventDateTime: null
+      }
     }
-
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   onChange(field) {
     return (value) => {
-      this.setState({ [field]: value })
+      var newState = {
+        ...this.state,
+        [field]: value
+      }
+      this.setState({
+        ...newState,
+        errors: {
+          ...this.state.errors,
+          [field]: this.getErrors(newState)[field]
+        }
+      })
     }
+  }
+
+  getErrors (state) {
+    if (!state) state = this.state
+    var errors = {
+      title: titleValidator(state.title),
+      description: descriptionValidator(state.description),
+      eventDateTime: eventDateTimeValidator(state.eventDateTime)
+    }
+    return errors
   }
 
   onSubmit(e) {
     e.preventDefault()
+    if (_.some(_.values(this.getErrors()), (e) => e)) {
+      return this.setState({errors: this.getErrors()})
+    }
     this.props.createEvent({
       TimelineId: this.props.timelineId,
       Title: this.state.title,
@@ -58,18 +90,21 @@ export class CreateEventModal extends Component {
                   value={this.state.title}
                   label="Title"
                   placeholder="Please enter event title..."
+                  error={this.state.errors.title}
                 />
                 <Textarea
                   onChange={this.onChange('description')}
                   value={this.state.description}
                   label="Description"
                   placeholder="Please enter event description..."
+                  error={this.state.errors.description}
                 />
                 <DatetimeInput
                   onChange={this.onChange('eventDateTime')}
                   value={this.state.eventDateTime}
                   label="Date and Time"
                   placeholder="Please enter the date and time of the event..."
+                  error={this.state.errors.eventDateTime}
                 />
                 <LocationInput
                   onChange={this.onChange('location')}

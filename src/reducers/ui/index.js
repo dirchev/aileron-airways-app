@@ -2,7 +2,7 @@ const defaultState = {
   timelinesFilter: null,
   modal: null,
   modalProps: null,
-  globalLoading: false
+  globalLoading: true
 }
 
 export default function uiReducer (state = defaultState, action) {

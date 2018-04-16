@@ -8,7 +8,7 @@ test('creates a store without initial state', () => {
       timelinesFilter: null,
       modal: null,
       modalProps: null,
-      globalLoading: false
+      globalLoading: true
     },
     events: {},
     eventLinks: [],

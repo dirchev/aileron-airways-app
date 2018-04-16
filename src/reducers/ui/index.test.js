@@ -7,7 +7,7 @@ it('sets the default state', function () {
     timelinesFilter: null,
     modal: null,
     modalProps: null,
-    globalLoading: false,
+    globalLoading: true,
   })
 })
 
@@ -20,32 +20,32 @@ it('processes SET_TIMELINES_FILTER', function () {
     timelinesFilter: null,
     modal: null,
     modalProps: null,
-    globalLoading: false,
+    globalLoading: true,
   })
   expect(reducer(state, action)).toEqual({
     timelinesFilter: 'something',
     modal: null,
     modalProps: null,
-    globalLoading: false,
+    globalLoading: true,
   })
 })
 
 it('processes GLOBAL_LOADING', function () {
   var action = {
     type: 'GLOBAL_LOADING',
-    value: true
+    value: false
   }
   var state = df({
     timelinesFilter: null,
     modal: null,
     modalProps: null,
-    globalLoading: false,
+    globalLoading: true,
   })
   expect(reducer(state, action)).toEqual({
     timelinesFilter: null,
     modal: null,
     modalProps: null,
-    globalLoading: true,
+    globalLoading: false,
   })
 })
 
@@ -59,12 +59,12 @@ it('processes OPEN_MODAL', function () {
     timelinesFilter: null,
     modal: null,
     modalProps: null,
-    globalLoading: false,
+    globalLoading: true,
   })
   expect(reducer(state, action)).toEqual({
     timelinesFilter: null,
     modal: 'createEvent',
     modalProps: {id: 1},
-    globalLoading: false,
+    globalLoading: true,
   })
 })

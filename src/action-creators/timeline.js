@@ -1,6 +1,7 @@
 import uuid from 'uuid'
 import SDK from '../timeline-sdk'
 import actions from './actions.js'
+import { push } from './../p2p-connection'
 
 export default {
   // Create timeline and sync it to server
@@ -18,9 +19,13 @@ export default {
         .then((response) => {
           return response
         })
-        .then((response) => {dispatch({
-          type: actions.timeline.SUCCESS_CREATE_TIMELINE,
-          data: response})
+        .then((response) => {
+          var action = {
+            type: actions.timeline.SUCCESS_CREATE_TIMELINE,
+            data: response
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -45,10 +50,12 @@ export default {
           return response
         })
         .then((response) => {
-          dispatch({
+          var action = {
             type: actions.timeline.SUCCESS_EDIT_TIMELINE,
             data: timelineData
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -70,10 +77,12 @@ export default {
       SDK.Timelines.delete(timelineId)
         .then((response) => {return response})
         .then((response) => {
-          dispatch({
+          var action = {
             type: actions.timeline.SUCCESS_DELETE_TIMELINE,
             data: {Id: timelineId},
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({

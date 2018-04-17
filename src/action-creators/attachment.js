@@ -1,6 +1,7 @@
 import uuid from 'uuid'
 import SDK from '../timeline-sdk'
 import actions from './actions.js'
+import { push } from '../p2p-connection'
 
 export default {
   create: function (attachmentData) {
@@ -24,10 +25,12 @@ export default {
         })
         .then((getURL) => {
           attachmentData.getURL = getURL.result
-          dispatch({
+          var action = {
             type: actions.attachment.SUCCESS_CREATE_ATTACHMENT,
             data: { Id: assignedId, ...attachmentData }
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -79,10 +82,12 @@ export default {
       })
       SDK.Attachments.delete(attachmentId)
         .then((result) => {
-          dispatch({
+          var action = {
             type: actions.attachment.SUCCESS_DELETE_ATTACHMENT,
             data: {Id: attachmentId}
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({

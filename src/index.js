@@ -10,12 +10,17 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
+import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
-import store from './store'
+import initStore from './store'
+
+var {store, persistor} = initStore()
 
 var toRender = (
   <Provider store={store}>
-    <App loadDataOnStart />
+    <PersistGate persistor={persistor}>
+      <App loadDataOnStart />
+    </PersistGate>
   </Provider>
 )
 

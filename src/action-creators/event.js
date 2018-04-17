@@ -1,6 +1,7 @@
 import uuid from 'uuid'
 import SDK from '../timeline-sdk'
 import actions from './actions.js'
+import { push } from '../p2p-connection'
 
 export default {
   create: function (eventData) {
@@ -17,10 +18,12 @@ export default {
           SDK.Timelines.linkEvent(eventData.TimelineId, assignedId)
         })
         .then(() => {
-          dispatch({
+          var action = {
             type: actions.event.SUCCESS_CREATE_EVENT,
             data: { Id: assignedId, ...eventData }
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -41,10 +44,12 @@ export default {
 
       SDK.TimelineEvents.editTitle(eventData.Id, eventData.Title)
         .then((response) => {
-          dispatch({
+          var action = {
             type: actions.event.SUCCESS_EDIT_EVENT_TITLE,
             data: eventData
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -65,10 +70,12 @@ export default {
 
       SDK.TimelineEvents.editDescription(eventData.Id, eventData.Description)
         .then((response) => {
-          dispatch({
+          var action = {
             type: actions.event.SUCCESS_EDIT_EVENT_DESCRIPTION,
             data: eventData
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -89,10 +96,12 @@ export default {
 
       SDK.TimelineEvents.editLocation(eventData.Id, eventData.Location)
         .then((response) => {
-          dispatch({
+          var action = {
             type: actions.event.SUCCESS_EDIT_EVENT_LOCATION,
             data: eventData
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -160,10 +169,12 @@ export default {
           SDK.TimelineEvents.delete(eventId)
         })
         .then(() => {
-          dispatch({
+          var action = {
             type: actions.event.SUCCESS_DELETE_EVENT,
             data: { Id: eventId, TimelineId: timelineId }
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch((error) => {
           dispatch({
@@ -208,10 +219,12 @@ export default {
 
       SDK.TimelineEvents.linkEvent(eventId, toLinkEventId)
         .then(function (result) {
-          dispatch({
+          var action = {
             type: actions.event.SUCCESS_LINK_EVENT,
             data: result
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch(function (error) {
           dispatch({
@@ -232,10 +245,12 @@ export default {
 
       SDK.TimelineEvents.unlinkEvent(eventId, toUnlinkEventId)
         .then(function (result) {
-          dispatch({
+          var action = {
             type: actions.event.SUCCESS_UNLINK_EVENT,
             data: { TimelineEventId: eventId, LinkedToTimelineEventId: toUnlinkEventId },
-          })
+          }
+          dispatch(action)
+          push(action)
         })
         .catch(function (error) {
           console.log(error);

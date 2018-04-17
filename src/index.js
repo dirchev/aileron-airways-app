@@ -9,6 +9,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
+import { setStore } from './p2p-connection'
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -18,6 +19,8 @@ var toRender = (
     <App loadDataOnStart />
   </Provider>
 )
+
+setStore(store)
 
 ReactDOM.render(toRender, document.getElementById('root'))
 registerServiceWorker()

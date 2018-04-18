@@ -20,16 +20,14 @@ export class TimelinePage extends Component {
   }
 
   getNavigationItems () {
-    var backButton = (
-      <Link to={`/`}
-        className="navbar-item" key="home-button">
-        <i className="fa fa-home mr-sm"></i>
-        Home
+    var homeButton = (
+      <Link to={`/`} className="navbar-item" key="home-button" style={{backgroundColor: '#fff'}}>
+        <img src="/logo.png" alt="Aileron Airways" />
       </Link>
     )
 
     return {
-      actions: [backButton]
+      actions: [homeButton]
     }
   }
 

@@ -18,7 +18,7 @@ class App extends Component {
     if (this.props.globalLoading) return (
       <div className="pageloader is-active">
         <div className="title has-text-centered">
-          Aileron Airways Milestone App <br/>
+          Aileron Airways Flight Tracking App <br/>
           Team 7
         </div>
       </div>

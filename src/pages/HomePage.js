@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Navigation from '../components/Navigation'
 import TimelineRegister from '../components/TimelineRegister'
@@ -13,8 +14,14 @@ import _ from 'lodash'
 
 export class HomePage extends Component {
   getNavigationItems () {
+    var homeButton = (
+      <Link to={`/`} className="navbar-item" key="home-button" style={{backgroundColor: '#fff'}}>
+        <img src="/logo.png" alt="Aileron Airways" />
+      </Link>
+    )
+
     return {
-      actionsRight: []
+      actions: [homeButton]
     }
   }
 

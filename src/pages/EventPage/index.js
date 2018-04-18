@@ -44,15 +44,13 @@ export class EventPage extends Component {
     )
 
     var homeButton = (
-      <Link to={`/`}
-        className="navbar-item" key="home-button">
-        <i className="fa fa-home mr-sm"></i>
-        Home
+      <Link to={`/`} className="navbar-item" key="home-button" style={{backgroundColor: '#fff'}}>
+        <img src="/logo.png" alt="Aileron Airways" />
       </Link>
     )
 
     return {
-      actions: [backButton, homeButton],
+      actions: [homeButton, backButton],
     }
   }
 

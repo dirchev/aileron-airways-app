@@ -19,3 +19,16 @@ $modal-content-spacing-mobile: 0px;
 .has-background-warning {
   background-color: $warning;
 }
+
+.table > thead > tr > th.is-sortable {
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: $light;
+  }
+  .th-icon {
+    line-height: 25px;
+    float: right;
+  }
+}

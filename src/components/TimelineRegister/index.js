@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import { push } from 'react-router-redux'
 
 import Pagination from '../Pagination'
 
@@ -56,46 +56,45 @@ export class TimelineRegister extends Component {
   render() {
     return (
       <div>
-        <table className="table is-fullwidth">
+        <table className="table is-fullwidth is-bordered is-hoverable">
           <thead>
             <tr>
-              <th onClick={this.handleSortChange('Title')}>
+              <th className="is-sortable" onClick={this.handleSortChange('Title')}>
                 Title
                 {
                   this.state.sort.path === 'Title'
                   ? (
-                    <i className={`ml-sm fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
+                    <i className={`th-icon fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
                   ) : null
                 }
               </th>
-              <th onClick={this.handleSortChange('CreationDateTime')}>
+              <th className="is-sortable" onClick={this.handleSortChange('CreationDateTime')}>
                 Creation Date
                 {
                   this.state.sort.path === 'CreationDateTime'
                   ? (
-                    <i className={`ml-sm fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
+                    <i className={`th-icon fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
                   ) : null
                 }
               </th>
-              <th className="is-hidden-mobile" onClick={this.handleSortChange('NoEvents')}>
+              <th className="is-sortable is-hidden-mobile" onClick={this.handleSortChange('NoEvents')}>
                 # of Events
                 {
                   this.state.sort.path === 'NoEvents'
                   ? (
-                    <i className={`ml-sm fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
+                    <i className={`th-icon fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
                   ) : null
                 }
               </th>
-              <th className="is-hidden-mobile" onClick={this.handleSortChange('LastEventDate')}>
+              <th className="is-sortable is-hidden-mobile" onClick={this.handleSortChange('LastEventDate')}>
                 Last Event Date
                 {
                   this.state.sort.path === 'LastEventDate'
                   ? (
-                    <i className={`ml-sm fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
+                    <i className={`th-icon fa fa-caret-${this.state.sort.order === -1 ? 'up' : 'down'}`}></i>
                   ) : null
                 }
               </th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -108,14 +107,16 @@ export class TimelineRegister extends Component {
   }
 
   renderItems () {
-    return this.getTimelines().map(function (timeline) {
+    return this.getTimelines().map((timeline) => {
+      var handleOpenTimeline = () => {
+        this.props.openTimeline(timeline.Id)
+      }
       return (
-        <tr key={timeline.Id}>
+        <tr key={timeline.Id} onClick={handleOpenTimeline} className="is-clickable">
           <td>{timeline.Title}</td>
           <td>{moment(timeline.CreationTimeStamp).format('DD MMM YYYY HH:mm')}</td>
           <td className="is-hidden-mobile">{timeline.NoEvents}</td>
           <td className="is-hidden-mobile">{timeline.LastEventDate && moment(timeline.LastEventDate).format('DD MMM YYYY HH:mm')}</td>
-          <td><Link to={`/timeline/${timeline.Id}`} className="button is-small is-success">Open</Link></td>
         </tr>
       )
     })
@@ -146,4 +147,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(TimelineRegister)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openTimeline: (timelineId) => {
+      dispatch(push(`/timeline/${timelineId}`))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimelineRegister)

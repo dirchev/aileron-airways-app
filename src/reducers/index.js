@@ -5,11 +5,13 @@ import eventsReducer from './events'
 import eventLinksReducer from './event-links'
 import uiReducer from './ui'
 import attachmentsReducer from './attachments'
+import { routerReducer } from 'react-router-redux'
 
 export default combineReducers({
   timelines: timelinesReducer,
   ui: uiReducer,
   events: eventsReducer,
   eventLinks: eventLinksReducer,
-  attachments: attachmentsReducer
+  attachments: attachmentsReducer,
+  router: routerReducer
 })

@@ -69,7 +69,7 @@ EventBox.propTypes = {
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     EventDateTime: PropTypes.string.isRequired,
-    Location: PropTypes.string.isRequired,
+    Location: PropTypes.string,
   }).isRequired,
   handleTitleChange: PropTypes.func.isRequired,
   handleDescriptionChange: PropTypes.func.isRequired,

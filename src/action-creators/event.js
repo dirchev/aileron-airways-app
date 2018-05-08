@@ -117,7 +117,7 @@ export default {
     return function (dispatch) {
       dispatch({
         type: actions.timeline.START_FETCH_EVENTS,
-        data: { Id: timelineId }
+        data: { TimelineId: timelineId }
       })
 
       SDK.Timelines.getLinkedEvents(timelineId)

@@ -56,7 +56,7 @@ export class TimelinePage extends Component {
               timeline={this.props.timeline}
             />
           </div>
-          <TimelineEvents timeline={this.props.timeline} />
+          {this.renderContent()}
         </div>
         <TimelineOptionsButton
           deleteTimeline={this.props.deleteTimeline}
@@ -64,6 +64,19 @@ export class TimelinePage extends Component {
         />
       </div>
     )
+  }
+
+  renderContent () {
+    if (this.props.timeline.loadingEvents) {
+      return (
+        <div className="notification">
+          <span className="icon"><i className="fa fa-spinner fa-spin"></i></span>
+          <span>Loading timeline events...</span>
+        </div>
+      )
+    } else {
+      return (<TimelineEvents timeline={this.props.timeline} />)
+    }
   }
 }
 

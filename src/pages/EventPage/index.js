@@ -124,7 +124,7 @@ EventPage.propTypes = {
     TimelineId: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-    Location: PropTypes.string.isRequired,
+    Location: PropTypes.string,
     EventDateTime: PropTypes.string.isRequired,
   }),
   changeEventTitle: PropTypes.func.isRequired,

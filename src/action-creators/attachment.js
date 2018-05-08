@@ -45,7 +45,7 @@ export default {
     return function (dispatch) {
       dispatch({
         type: actions.attachment.START_GET_EVENT_ATTACHMENTS,
-        data: {Id: eventId}
+        data: {EventId: eventId}
       })
       SDK.TimelineEvents.getAttachments(eventId)
         .then((attachments) => {
@@ -62,13 +62,13 @@ export default {
         .then((result) => {
           dispatch({
             type: actions.attachment.SUCCESS_GET_EVENT_ATTACHMENTS,
-            data: {Id: eventId, attachments: result}
+            data: { EventId: eventId, attachments: result }
           })
         })
         .catch((error) => {
           dispatch({
             type: actions.attachment.ERROR_GET_EVENT_ATTACHMENTS,
-            data: { Id: eventId },
+            data: { EventId: eventId },
             error: error
           })
         })

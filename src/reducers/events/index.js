@@ -3,6 +3,23 @@ const defaultState = {}
 
 export default function eventsReducer(state = defaultState, action) {
   switch (action.type) {
+    case 'START_GET_EVENT_ATTACHMENTS':
+      return {
+        ...state,
+        [action.data.EventId]: {
+          ...state[action.data.EventId],
+          loadingAttachments: true
+        }
+      }
+    case 'SUCCESS_GET_EVENT_ATTACHMENTS':
+    case 'ERROR_GET_EVENT_ATTACHMENTS':
+      return {
+        ...state,
+        [action.data.EventId]: {
+          ...state[action.data.EventId],
+          loadingAttachments: false
+        }
+      }
     case 'START_CREATE_EVENT':
     case 'START_EDIT_EVENT_TITLE':
     case 'START_EDIT_EVENT_DESCRIPTION':

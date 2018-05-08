@@ -100,6 +100,13 @@ class TimelineEvents extends Component {
   }
 
   renderEvents () {
+    if (!this.props.timeline.loadingEvents && !this.state.events.length) {
+      return (
+        <div className="notification is-info mt-md">
+          <span>No events found for this timeline.</span>
+        </div>
+      )
+    }
     if (this.state.viewMode === 'list') {
       return (<EventsList events={this.state.events} />)
     } else if (this.state.viewMode === 'calendar') {

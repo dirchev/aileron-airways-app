@@ -3,6 +3,23 @@ const defaultState = {}
 
 export default function timelinesReducer (state = defaultState, action) {
   switch(action.type) {
+    case 'START_FETCH_EVENTS':
+      return {
+        ...state,
+        [action.data.TimelineId]: {
+          ...state[action.data.TimelineId],
+          loadingEvents: true
+        }
+      }
+    case 'SUCCESS_FETCH_EVENTS':
+    case 'ERROR_FETCH_EVENTS':
+      return {
+        ...state,
+        [action.data.TimelineId]: {
+          ...state[action.data.TimelineId],
+          loadingEvents: false
+        }
+      }
     case 'START_CREATE_TIMELINE':
     case 'START_EDIT_TIMELINE':
     case 'START_DELETE_TIMELINE':

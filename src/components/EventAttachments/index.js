@@ -18,6 +18,20 @@ export class EventAttachments extends Component {
   }
 
   render () {
+    if (this.props.event.loadingAttachments) {
+      return (
+        <div className="notification mt-md">
+          <span className="icon"><i className="fa fa-spinner fa-spin"></i></span>
+          <span>Loading event attachments...</span>
+        </div>
+      )
+    } else if (!this.props.attachments.length) {
+      return (
+        <div className="notification is-info mt-md">
+          <span>There are no attachments for this event.</span>
+        </div>
+      )
+    }
     return (
       <div className="mt-md columns is-multiline">
         {

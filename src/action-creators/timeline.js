@@ -97,6 +97,7 @@ export default {
   // Get all available timelines from server
   fetchAll: function () {
     return function (dispatch) {
+      dispatch({type: actions.ui.GLOBAL_LOADING, value: true})
       dispatch({type: actions.timelines.START_FETCH_TIMELINES})
       SDK.Timelines.getAll()
         .then((response) => {
@@ -105,11 +106,13 @@ export default {
           })
         })
         .then((response) => {
+          dispatch({type: actions.ui.GLOBAL_LOADING, value: false})
           dispatch({type: actions.timelines.SUCCESS_FETCH_TIMELINES,
             data: response
           })
         })
         .catch((error) => {
+          dispatch({type: actions.ui.GLOBAL_LOADING, value: false})
           dispatch({
             type: actions.timelines.ERROR_FETCH_TIMELINES,
             error: error

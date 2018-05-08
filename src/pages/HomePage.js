@@ -45,21 +45,28 @@ export class HomePage extends Component {
           <div className="mb-lg">
             <TimelineSearch />
           </div>
-          {
-            this.props.hasFiltersApplied
-            ? (
-              <TimelinesSearchList />
-            )
-            : (
-              <TimelineRegister />
-            )
-          }
+          {this.renderContent()}
         </div>
         <HomeOptionsButton
           createTimeline={this.props.createTimeline}
         />
       </div>
     )
+  }
+
+  renderContent () {
+    if (this.props.globalLoading) {
+      return (
+        <div className="notification">
+          <span className="icon"><i className="fa fa-spinner fa-spin"></i></span>
+          <span>Loading...</span>
+        </div>
+      )
+    } else if (this.props.hasFiltersApplied) {
+      return (<TimelinesSearchList />)
+    } else {
+      return (<TimelineRegister />)
+    }
   }
 }
 
@@ -73,6 +80,7 @@ HomePage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    globalLoading: state.ui.globalLoading,
     timelines: _.chain(state.timelines).values().value(), // get array of timelines
     hasFiltersApplied: !!state.ui.timelinesFilter // indicate if there is a filter
   }

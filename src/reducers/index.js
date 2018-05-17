@@ -5,6 +5,7 @@ import eventsReducer from './events'
 import eventLinksReducer from './event-links'
 import uiReducer from './ui'
 import attachmentsReducer from './attachments'
+import syncReducer from './sync'
 import { routerReducer } from 'react-router-redux'
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
   events: eventsReducer,
   eventLinks: eventLinksReducer,
   attachments: attachmentsReducer,
-  router: routerReducer
+  router: routerReducer,
+  sync: syncReducer
 })

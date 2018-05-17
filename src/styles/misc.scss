@@ -32,3 +32,15 @@ $modal-content-spacing-mobile: 0px;
     float: right;
   }
 }
+
+.offline-message {
+  position: fixed;
+  top: 1%;
+  text-align: center;
+  text-transform: uppercase;
+  right: 1%;
+  background-color: $grey;
+  color: $white;
+  z-index: 10000;
+  padding: 5px 10px;
+}

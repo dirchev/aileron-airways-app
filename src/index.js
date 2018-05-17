@@ -9,22 +9,27 @@ import ReactDOM from 'react-dom'
 import HomePage from './pages/HomePage'
 import TimelinePage from './pages/TimelinePage'
 import EventPage from './pages/EventPage'
+import GlobalMessage from './components/GlobalMessage'
 import ModalsParent from './components/modals/ModalsParent'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
 import { setStore } from './p2p-connection'
+import setupNetworkStatus from './network-status'
 import createHistory from 'history/createBrowserHistory'
 import { Provider } from 'react-redux'
 import getStore from './store'
 
 const history = createHistory()
 const store = getStore(history)
+
 setStore(store)
+setupNetworkStatus(store)
 
 var toRender = (
   <Provider store={store}>
     <Fragment>
+      <GlobalMessage />
       <ConnectedRouter history={history}>
         <Fragment>
           <Route exact path="/" component={HomePage}></Route>

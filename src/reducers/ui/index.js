@@ -23,6 +23,11 @@ export default function uiReducer (state = defaultState, action) {
         modal: action.data,
         modalProps: action.props
       }
+    case 'UPDATE_NETWORK_STATUS':
+      return {
+        ...state,
+        networkIsOffline: action.status
+      }
     default:
       return state
   }

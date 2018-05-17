@@ -22,7 +22,7 @@ class TimelineEvents extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      viewMode: 'list',
+      viewMode: 'timeline',
       searchTerm: '',
       events: props.timeline.events
     }
@@ -79,6 +79,10 @@ class TimelineEvents extends Component {
           </div>
           <div className="column is-narrow">
             <div className="buttons has-addons is-right">
+              <button onClick={this.handleChangeViewMode('timeline')} className={`button ${this.state.viewMode === 'timeline' ? 'is-primary': ''}`}>
+                <span>Timeline</span>
+                <span className="icon is-small"><i className="fa fa-history"></i></span>
+              </button>
               <button onClick={this.handleChangeViewMode('list')} className={`button ${this.state.viewMode === 'list' ? 'is-primary': ''}`}>
                 <span>List</span>
                 <span className="icon is-small"><i className="fa fa-list-ul"></i></span>
@@ -86,10 +90,6 @@ class TimelineEvents extends Component {
               <button onClick={this.handleChangeViewMode('calendar')} className={`button is-hidden-mobile ${this.state.viewMode === 'calendar' ? 'is-primary': ''}`}>
                 <span>Calendar</span>
                 <span className="icon is-small"><i className="fa fa-calendar"></i></span>
-              </button>
-              <button onClick={this.handleChangeViewMode('timeline')} className={`button ${this.state.viewMode === 'timeline' ? 'is-primary': ''}`}>
-                <span>Timeline</span>
-                <span className="icon is-small"><i className="fa fa-history"></i></span>
               </button>
             </div>
           </div>

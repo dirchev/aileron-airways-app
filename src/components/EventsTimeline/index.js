@@ -34,9 +34,6 @@ class EventsTimeline extends Component {
       </Fragment>
     )
 
-    // this is not the right way to do things
-    // the better way would be to have a class like "is-centered-desktop"
-    // can be done in the future by submitting a PR to https://github.com/Wikiki/bulma-timeline
     return (
       <div>
         <div className="buttons pull-right">
@@ -90,9 +87,11 @@ class EventsTimeline extends Component {
           <div className="timeline-marker"></div>
           <div className="timeline-content">
             <div className="box is-primary">
-              {
-                yearMoment.format('YYYY')
-              } - {events.length} events
+             <div className="ml-sm is-size-7 has-text-grey">
+                {
+                  yearMoment.format('YYYY')
+                } - {events.length} events
+              </div>
               <ul>
                 {
                   events.map(function (event) {
@@ -129,9 +128,11 @@ class EventsTimeline extends Component {
           <div className="timeline-marker"></div>
           <div className="timeline-content">
             <div className="box is-primary">
-              {
-                monthMoment.format('MMMM YYYY')
-              } - {events.length} events
+              <div className="ml-sm is-size-7 has-text-grey">
+                {
+                  monthMoment.format('MMMM YYYY')
+                } - {events.length} events
+              </div>
               <ul>
                 {
                   events.map(function (event) {
@@ -168,9 +169,11 @@ class EventsTimeline extends Component {
           <div className="timeline-marker"></div>
           <div className="timeline-content">
             <div className="box is-primary">
-              {
-                dayMoment.format('dddd, MMMM Do YYYY')
-              } - {events.length} events
+              <div className="ml-sm is-size-7 has-text-grey">
+                {
+                  dayMoment.format('dddd, MMMM Do YYYY')
+                } - {events.length} events
+              </div>
               <ul>
                 {
                   events.map(function (event) {

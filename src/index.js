@@ -29,9 +29,9 @@ setupNetworkStatus(store)
 var toRender = (
   <Provider store={store}>
     <Fragment>
-      <GlobalMessage />
       <ConnectedRouter history={history}>
         <Fragment>
+          <GlobalMessage />
           <Route exact path="/" component={HomePage}></Route>
           <Route exact path="/timeline/:Id" component={TimelinePage}></Route>
           <Route exact path="/event/:Id" component={EventPage}></Route>

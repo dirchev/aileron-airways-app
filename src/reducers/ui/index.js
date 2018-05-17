@@ -1,8 +1,12 @@
+import _ from 'lodash'
+
 const defaultState = {
   timelinesFilter: null,
   modal: null,
   modalProps: null,
-  globalLoading: false
+  globalLoading: false,
+  notworkIsOffline: false,
+  syncConflicts: []
 }
 
 export default function uiReducer (state = defaultState, action) {
@@ -27,6 +31,22 @@ export default function uiReducer (state = defaultState, action) {
       return {
         ...state,
         networkIsOffline: action.status
+      }
+    case 'ADD_SYNC_CONFLICT':
+      return {
+        ...state,
+        syncConflicts: [
+          ...state.syncConflicts,
+          action.data
+        ]
+      }
+    case 'REMOVE_SYNC_CONFLICT':
+      return {
+        ...state,
+        syncConflicts: [
+          ...state.syncConflicts,
+          _.filter(action.data, {id: action.id})
+        ]
       }
     default:
       return state

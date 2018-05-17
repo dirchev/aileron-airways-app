@@ -61,7 +61,6 @@ export default function timelinesReducer (state = defaultState, action) {
       })
     case 'START_CREATE_TIMELINE':
     case 'START_EDIT_TIMELINE':
-    case 'START_DELETE_TIMELINE':
       return upsertTimeline(state, {
         ...action.data,
         loading: true,
@@ -75,6 +74,13 @@ export default function timelinesReducer (state = defaultState, action) {
         loading: false,
         synced: true
       })
+    case 'OFFLINE_CREATE_TIMELINE':
+    case 'OFFLINE_EDIT_TIMELINE':
+      return upsertTimeline(state, {
+        ...action.data,
+        loading: false,
+        synced: false
+      })
     case 'ERROR_EDIT_TIMELINE':
     case 'ERROR_CREATE_TIMELINE':
     case 'ERROR_DELETE_TIMELINE':
@@ -84,6 +90,7 @@ export default function timelinesReducer (state = defaultState, action) {
         synced: false,
         error: action.error
       })
+    case 'START_DELETE_TIMELINE':
     case 'SUCCESS_DELETE_TIMELINE':
       return removeTimeline(state, action.data)
     case 'SUCCESS_FETCH_TIMELINES':

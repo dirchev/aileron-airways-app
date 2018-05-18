@@ -117,7 +117,7 @@ export default {
     return function (dispatch) {
       dispatch({
         type: actions.timeline.START_FETCH_EVENTS,
-        data: { TimelineId: timelineId }
+        data: { Id: timelineId }
       })
 
       SDK.Timelines.getLinkedEvents(timelineId)
@@ -142,7 +142,7 @@ export default {
           dispatch({
             type: actions.timeline.SUCCESS_FETCH_EVENTS,
             data: {
-              TimelineId: timelineId,
+              Id: timelineId,
               events: events
             }
           })

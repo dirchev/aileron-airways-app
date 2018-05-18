@@ -2,6 +2,7 @@ import uuid from 'uuid'
 import SDK from '../timeline-sdk'
 import actions from './actions.js'
 import { push } from './../p2p-connection'
+import moment from 'moment'
 
 export default {
   // Create timeline and sync it to server
@@ -9,46 +10,60 @@ export default {
     var assignedId = uuid.v4()
     timelineData = {...timelineData}
 
-    return function (dispatch) {
+    return async function (dispatch, getState) {
       dispatch({
         type: actions.timeline.START_CREATE_TIMELINE,
-        data: {Id: assignedId, ...timelineData}
+        data: {
+          Id: assignedId,
+          CreationTimeStamp: moment().toISOString(),
+          ...timelineData
+        }
       })
 
-      SDK.Timelines.create({TimelineId: assignedId, ...timelineData})
-        .then((response) => {
-          return response
+      if (getState().ui.networkIsOffline) {
+        dispatch({
+          type: actions.timeline.OFFLINE_CREATE_TIMELINE,
+          data: {Id: assignedId, ...timelineData}
         })
-        .then((response) => {
-          var action = {
-            type: actions.timeline.SUCCESS_CREATE_TIMELINE,
-            data: response
-          }
-          dispatch(action)
-          push(action)
+        return
+      }
+
+      try {
+        var response = await SDK.Timelines.create({TimelineId: assignedId, ...timelineData})
+      } catch (error) {
+        dispatch({
+          type: actions.timeline.ERROR_CREATE_TIMELINE,
+          data: {Id: assignedId, ...timelineData},
+          error: error
         })
-        .catch((error) => {
-          dispatch({
-            type: actions.timeline.ERROR_CREATE_TIMELINE,
-            data: {Id: assignedId, ...timelineData},
-            error: error
-          })
-        })
+      }
+      var action = {
+        type: actions.timeline.SUCCESS_CREATE_TIMELINE,
+        data: response
+      }
+      dispatch(action)
+      push(action)
     }
   },
 
   // Get all available timelines from server
   edit: function (timelineData) {
-    return function (dispatch) {
+    return function (dispatch, getState) {
       dispatch({
         type: actions.timeline.START_EDIT_TIMELINE,
         data: timelineData
       })
 
-      SDK.Timelines.editTitle(timelineData.Id, timelineData.Title)
-        .then((response) => {
-          return response
+      if (getState().ui.networkIsOffline) {
+        dispatch({
+          type: actions.timeline.OFFLINE_EDIT_TIMELINE,
+          data: timelineData,
+          prevData: getState().timelines[timelineData.Id]
         })
+        return
+      }
+
+      SDK.Timelines.editTitle(timelineData.Id, timelineData.Title)
         .then((response) => {
           var action = {
             type: actions.timeline.SUCCESS_EDIT_TIMELINE,
@@ -68,14 +83,21 @@ export default {
   },
 
   delete: function (timelineId) {
-    return function (dispatch) {
+    return function (dispatch, getState) {
       dispatch({
         type: actions.timeline.START_DELETE_TIMELINE,
         data: {Id: timelineId},
       })
 
+      if (getState().ui.networkIsOffline) {
+        dispatch({
+          type: actions.timeline.OFFLINE_DELETE_TIMELINE,
+          data: {Id: timelineId}
+        })
+        return
+      }
+
       SDK.Timelines.delete(timelineId)
-        .then((response) => {return response})
         .then((response) => {
           var action = {
             type: actions.timeline.SUCCESS_DELETE_TIMELINE,

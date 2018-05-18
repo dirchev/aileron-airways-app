@@ -10,6 +10,7 @@ var store
 hub.subscribe('all')
   .on('data', function (message) {
     if (!store || message.id === id) return
+    if (store.getState().ui.syncConflicts.length) return
     store.dispatch(message.action)
   })
 

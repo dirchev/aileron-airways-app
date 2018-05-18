@@ -22,8 +22,9 @@ class EditableLocation extends Component {
 
   removeLocation (e) {
     e.preventDefault()
-    this.setState({ editMode: false })
-    this.props.onChange(null)
+    this.setState({ value: null })
+    // this.setState({ editMode: false })
+    // this.props.onChange(null)
   }
 
   handleSubmit(e) {
@@ -49,14 +50,19 @@ class EditableLocation extends Component {
             <div className="control">
               <button type="submit" className="button is-link mr-sm"><i className="fa fa-send"></i></button>
               <button type="button" onClick={this.resetField} className="button is-link is-danger"><i className="fa fa-times"></i></button>
-              <button type="button" onClick={this.removeLocation} className="button is-link is-danger pull-right">
-              <span className="icon">
-                <i className="fa fa-times"></i>
-              </span>
-              <span>
-                Remove Location
-              </span>
-              </button>
+              {
+                this.state.value
+                ? (
+                  <button type="button" onClick={this.removeLocation} className="button is-link is-danger pull-right">
+                    <span className="icon">
+                      <i className="fa fa-times"></i>
+                    </span>
+                    <span>
+                      Remove Location
+                    </span>
+                  </button>
+                ) : null
+              }
             </div>
           </div>
         </form>

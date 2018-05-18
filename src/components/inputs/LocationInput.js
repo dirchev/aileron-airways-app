@@ -73,12 +73,13 @@ class LocationInput extends Component {
   }
 
   componentWillReceiveProps (props) {
-    this.setState({
-      center: {
+    var center = props.value
+      ? {
         lat: parseFloat(props.value.split(',')[0]),
         lng: parseFloat(props.value.split(',')[1])
       }
-    })
+      : this.state.center
+    this.setState({ center })
   }
 
   getMarkerCoords () {

@@ -10,6 +10,7 @@ import TimelineItem from './TimelineItem'
 const FUSE_OPTIONS = {
   includeMatches: true,
   tokenize: true,
+  threshold: 0.3,
   keys: [
     {name: 'Title', weight: 0.6},
     {name: 'events.Title', weight: 0.6},

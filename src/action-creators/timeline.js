@@ -2,6 +2,7 @@ import uuid from 'uuid'
 import SDK from '../timeline-sdk'
 import actions from './actions.js'
 import { push } from './../p2p-connection'
+import moment from 'moment'
 
 export default {
   // Create timeline and sync it to server
@@ -12,7 +13,11 @@ export default {
     return async function (dispatch, getState) {
       dispatch({
         type: actions.timeline.START_CREATE_TIMELINE,
-        data: {Id: assignedId, ...timelineData}
+        data: {
+          Id: assignedId,
+          CreationTimeStamp: moment().toISOString(),
+          ...timelineData
+        }
       })
 
       if (getState().ui.networkIsOffline) {

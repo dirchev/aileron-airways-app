@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import _ from 'lodash'
 
 class EventsTimeline extends Component {
   constructor () {
@@ -78,7 +79,11 @@ class EventsTimeline extends Component {
       return acc
     }, {})
 
-    return Object.keys(years).map(function (year) {
+    var sort = function (year) {
+      return moment(year, 'YYYY').toISOString()
+    }
+
+    return _.chain(Object.keys(years)).sortBy(sort).reverse().value().map(function (year) {
       var events = years[year]
       var yearMoment = moment(year, 'YYYY')
 
@@ -96,7 +101,7 @@ class EventsTimeline extends Component {
                 {
                   events.map(function (event) {
                     return (
-                      <li>
+                      <li key={event.Id}>
                         <Link to={`/event/${event.Id}`}>{event.Title}</Link>
                       </li>
                     )
@@ -119,7 +124,11 @@ class EventsTimeline extends Component {
       return acc
     }, {})
 
-    return Object.keys(months).map(function (month) {
+    var sort = function (month) {
+      return moment(month, 'MM-YYYY').toISOString()
+    }
+
+    return _.chain(Object.keys(months)).sortBy(sort).reverse().value().map(function (month) {
       var events = months[month]
       var monthMoment = moment(month, 'MM-YYYY')
 
@@ -137,7 +146,7 @@ class EventsTimeline extends Component {
                 {
                   events.map(function (event) {
                     return (
-                      <li>
+                      <li key={event.Id}>
                         <Link to={`/event/${event.Id}`}>{event.Title}</Link>
                       </li>
                     )
@@ -160,7 +169,11 @@ class EventsTimeline extends Component {
       return acc
     }, {})
 
-    return Object.keys(days).map(function (day) {
+    var sort = function (day) {
+      return moment(day, 'DD-MM-YYYY').toISOString()
+    }
+
+    return _.chain(Object.keys(days)).sortBy(sort).reverse().value().map(function (day) {
       var events = days[day]
       var dayMoment = moment(day, 'DD-MM-YYYY')
 
@@ -178,7 +191,7 @@ class EventsTimeline extends Component {
                 {
                   events.map(function (event) {
                     return (
-                      <li>
+                      <li key={event.Id}>
                         <Link to={`/event/${event.Id}`}>{event.Title}</Link>
                       </li>
                     )

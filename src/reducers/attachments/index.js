@@ -46,7 +46,6 @@ const upsertAttachments = function (state, attachmentsArr) {
   return attachmentsArr.reduce(upsertAttachment, state)
 }
 
-
 export default function eventLinksReducer(state = defaultState, action) {
   switch (action.type) {
     case 'SUCCESS_GET_EVENT_ATTACHMENTS':

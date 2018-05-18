@@ -60,7 +60,7 @@ export default function eventsReducer(state = defaultState, action) {
       return upsertEvent(state, {
         ...action.data,
         Id: action.data.EventId,
-        loadingattachments: false
+        loadingAttachments: false
       })
     case 'START_CREATE_EVENT':
     case 'START_EDIT_EVENT_TITLE':

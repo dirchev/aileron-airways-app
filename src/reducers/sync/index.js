@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import uuid from 'uuid'
 const defaultState = []
 
@@ -28,7 +27,7 @@ const upsertItem = function (state, itemData) {
  * @returns {Object} new version of the state
  */
 const removeItem = function (state, itemData) {
-  return _.filter(state, {id: itemData.id})
+  return state.filter(({id}) => itemData.id !== id)
 }
 
 export default function syncReducer (state = defaultState, action) {

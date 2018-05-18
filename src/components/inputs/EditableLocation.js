@@ -23,8 +23,6 @@ class EditableLocation extends Component {
   removeLocation (e) {
     e.preventDefault()
     this.setState({ value: null })
-    // this.setState({ editMode: false })
-    // this.props.onChange(null)
   }
 
   handleSubmit(e) {
